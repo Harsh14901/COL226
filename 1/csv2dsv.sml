@@ -2,9 +2,6 @@ exception emptyInputFile;
 exception UnevenFields;
 exception UnexpectedChar;
 
-(* val escapeString = String.str(Char.chr(92));
-val unPrintable = String.str(Char.chr(255)); *)
-
 fun readFile filename =
     let
       val instream = TextIO.openIn filename
@@ -54,57 +51,6 @@ fun convertNewlines(infilename, newline1, outfilename, newline2) =
   in
     writeFile outfilename outContent
   end; 
-
-
-(* 
-fun convertDelimiters(infilename, delim1, outfilename, delim2) =
-  let
-    val inContent = readFile(infilename)
-    val escapedDelim1 = escapeString ^ (String.str delim1)
-    val escapedDelim2 = escapeString ^ (String.str delim2)
-    
-    (* convert \d to \255 *)
-    val temp = replaceAll temp escapedDelim2 unPrintable
-    (* convert d to \d *)
-    val temp = replaceAll temp (String.str delim2) escapedDelim2
-    (* convert \255 to \\d *)
-    val temp = replaceAll temp unPrintable (escapeString ^ escapedDelim2)
-
-    (* convert \c to \255 *)
-    val temp = replaceAll temp escapedDelim1 unPrintable 
-    (* convert c to d *)
-    val temp = replaceAll temp (String.str delim1) (String.str delim2)
-    (* convert \255 to c *)
-    val temp = replaceAll temp unPrintable (String.str delim1)
-    val outContent = temp
-  in
-    writeFile outfilename outContent
-  end;  *)
-
-
-
-(* fun validateInput inContent delim newline =
-  let
-
-    val firstLine::lines = String.tokens (fn x => x = newline) inContent
-    fun getNumFields line = length(String.fields (fn x => x = delim) line)
-    val numBaseFields = getNumFields firstLine
-    fun checkFields([], i) = true
-      | checkFields(x::xs, i) = 
-        let
-          val numFields = getNumFields x
-        in
-          if numFields <> numBaseFields then 
-            raise UnevenFields("Expected: " ^ Int.toString(numBaseFields) ^ " fields, Present: " ^ Int.toString(numFields) ^ " fields on Line: " ^ Int.toString(i) ^ "\n")
-          else 
-            checkFields(xs, i + 1)
-        end;
-  in
-    checkFields(lines, 2)line. ... Newline inside a value seems to work if you use semicolon as separator, instead of comma
-    handle UnevenFields msg => not (print msg = ())
-                      | exn => false
-  end
-   *)
 
 
 fun convertDelimiters(infilename, delim1, outfilename, delim2) = 
@@ -160,7 +106,7 @@ let
           (print("Expected: " ^ Int.toString(totalFields) ^ " fields, Present: " ^ Int.toString(fieldCount) ^ " fields on Line: " ^ Int.toString(lineNum) ^ "\n"); raise UnevenFields; [])
         else 
           contentParser(cl, 0, totalFields, start, lineNum + 1, c::outList)
-          
+
   val inList = String.explode(readFile(infilename))
   
   val outContent = String.implode(List.rev(contentParser(inList, 0, ~1, start, 1, [])))
