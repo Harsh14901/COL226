@@ -1,8 +1,8 @@
 exception emptyInputFile;
-exception UnevenFields;
-exception MisplacedQuote;
-exception IllegalCharacter;
-exception CorruptedFile;
+exception UnevenFields of string;
+exception MisplacedQuote of string;
+exception IllegalCharacter of string;
+exception CorruptedFile of string;
 
 fun readFile filename =
     let
@@ -25,12 +25,13 @@ fun writeFile filename content =
       ()
     end;
 
+
 fun convertDelimiters(infilename, delim1, outfilename, delim2) = 
 let
   datatype states = start | singleQuote | unquotedField | doubleQuote | eol 
   fun contentParser([], fieldCount, totalFields, state, lineNum, outList) =
       if(state <> start) then 
-        (print("File stream terminated unexpectedly at line: " ^ Int.toString(lineNum) ^ "\n"); raise CorruptedFile; [])
+        let val msg = "File stream terminated unexpectedly at line: " ^ Int.toString(lineNum) ^ "\n" in (print msg; raise CorruptedFile(msg); []) end
       else
         outList
       
@@ -60,10 +61,10 @@ let
         else if (c = #"\n") then
           contentParser(c::cl, fieldCount + 1, totalFields, eol, lineNum, outList)
         else
-          (print("Found an unexpected character \"" ^ String.str(c) ^ "\" at line: " ^ Int.toString(lineNum) ^ "\n"); raise IllegalCharacter; [])
+          let val msg = "Found an unexpected character \"" ^ String.str(c) ^ "\" at line: " ^ Int.toString(lineNum) ^ "\n" in (print msg; raise IllegalCharacter(msg); []) end
       | unquotedField =>
         if (c = #"\"") then
-          (print("Found a misplaced quote at line number: " ^ Int.toString(lineNum) ^ "\n"); raise MisplacedQuote; [])
+          let val msg = "Found a misplaced quote at line number: " ^ Int.toString(lineNum) ^ "\n" in (print msg; raise MisplacedQuote(msg); []) end
         else if (c = delim1) then
           contentParser(cl, fieldCount + 1, totalFields, start, lineNum, delim2::(#"\""::outList))
         else if (c = #"\n") then
@@ -75,7 +76,7 @@ let
         if (totalFields = ~1) then
           contentParser(cl, 0, fieldCount, start, lineNum + 1, c::outList)
         else if (totalFields <> fieldCount) then
-          (print("Expected: " ^ Int.toString(totalFields) ^ " fields, Present: " ^ Int.toString(fieldCount) ^ " fields on Line " ^ Int.toString(lineNum) ^ "\n"); raise UnevenFields; [])
+          let val msg = "Expected: " ^ Int.toString(totalFields) ^ " fields, Present: " ^ Int.toString(fieldCount) ^ " fields on Line " ^ Int.toString(lineNum) ^ "\n" in (print msg; raise UnevenFields(msg); []) end
         else 
           contentParser(cl, 0, totalFields, start, lineNum + 1, c::outList)
 
