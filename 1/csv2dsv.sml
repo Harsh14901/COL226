@@ -1,6 +1,8 @@
 exception emptyInputFile;
 exception UnevenFields;
-exception UnexpectedChar;
+exception MisplacedQuote;
+exception IllegalCharacter;
+exception CorruptedFile;
 
 fun readFile filename =
     let
@@ -28,7 +30,7 @@ let
   datatype states = start | singleQuote | unquotedField | doubleQuote | eol 
   fun contentParser([], fieldCount, totalFields, state, lineNum, outList) =
       if(state <> start) then 
-        (print("File stream terminated unexpectedly at line: " ^ Int.toString(lineNum) ^ "\n"); raise UnexpectedChar; [])
+        (print("File stream terminated unexpectedly at line: " ^ Int.toString(lineNum) ^ "\n"); raise CorruptedFile; [])
       else
         outList
       
@@ -38,7 +40,7 @@ let
           if (c = #"\"") then 
             contentParser(cl, fieldCount, totalFields, singleQuote, lineNum, c::outList)
           else if (c = #"\n") then
-            (print("Found a record terminating with a delimiter or a record beginning with new line at line: " ^ Int.toString(lineNum) ^ "\n"); raise UnexpectedChar; [])
+            contentParser(c::cl, fieldCount + 1, totalFields, eol, lineNum, outList)
           else if (c = delim1) then
             contentParser(cl, fieldCount + 1, totalFields, start, lineNum, delim2::outList)
           else 
@@ -58,10 +60,10 @@ let
         else if (c = #"\n") then
           contentParser(c::cl, fieldCount + 1, totalFields, eol, lineNum, outList)
         else
-          (print("Found an unexpected character " ^ String.str(c) ^ " at line: " ^ Int.toString(lineNum) ^ "\n"); raise UnexpectedChar; [])
+          (print("Found an unexpected character \"" ^ String.str(c) ^ "\" at line: " ^ Int.toString(lineNum) ^ "\n"); raise IllegalCharacter; [])
       | unquotedField =>
         if (c = #"\"") then
-          (print("Found a misplaced quote at line number: " ^ Int.toString(lineNum) ^ "\n"); raise UnexpectedChar; [])
+          (print("Found a misplaced quote at line number: " ^ Int.toString(lineNum) ^ "\n"); raise MisplacedQuote; [])
         else if (c = delim1) then
           contentParser(cl, fieldCount + 1, totalFields, start, lineNum, delim2::(#"\""::outList))
         else if (c = #"\n") then
@@ -73,7 +75,7 @@ let
         if (totalFields = ~1) then
           contentParser(cl, 0, fieldCount, start, lineNum + 1, c::outList)
         else if (totalFields <> fieldCount) then
-          (print("Expected: " ^ Int.toString(totalFields) ^ " fields, Present: " ^ Int.toString(fieldCount) ^ " fields on Line: " ^ Int.toString(lineNum) ^ "\n"); raise UnevenFields; [])
+          (print("Expected: " ^ Int.toString(totalFields) ^ " fields, Present: " ^ Int.toString(fieldCount) ^ " fields on Line " ^ Int.toString(lineNum) ^ "\n"); raise UnevenFields; [])
         else 
           contentParser(cl, 0, totalFields, start, lineNum + 1, c::outList)
 
