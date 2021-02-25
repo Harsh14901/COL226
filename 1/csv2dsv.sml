@@ -23,36 +23,6 @@ fun writeFile filename content =
       ()
     end;
 
-fun replaceAll instring findStr replaceStr = 
-  let
-    fun findAndReplace(i, converted) =
-      let
-        val sourceLength = String.size(instring)
-        val keyLength = String.size(findStr);
-      in
-        if (i = sourceLength) then 
-          converted
-        else if (Int.>(i + keyLength ,sourceLength)) then
-          converted ^ String.extract(instring, i, NONE)
-        else if (String.substring(instring, i, keyLength) = findStr) then
-          findAndReplace(i + keyLength, converted ^ replaceStr)
-        else
-          findAndReplace(i+1, converted ^ String.substring(instring, i , 1))
-      end;
-  in
-    findAndReplace(0, "")
-  end;
-
-
-fun convertNewlines(infilename, newline1, outfilename, newline2) =
-  let
-    val inContent = readFile(infilename)
-    val outContent = replaceAll inContent newline1 newline2
-  in
-    writeFile outfilename outContent
-  end; 
-
-
 fun convertDelimiters(infilename, delim1, outfilename, delim2) = 
 let
   datatype states = start | singleQuote | unquotedField | doubleQuote | eol 
@@ -117,7 +87,3 @@ end
 
 fun csv2tsv(infilename, outfilename) = convertDelimiters(infilename, #",", outfilename, #"\t")
 fun tsv2csv(infilename, outfilename) = convertDelimiters(infilename, #"\t", outfilename, #",")
-
-
-fun unix2dos(infilename, outfilename) = convertNewlines(infilename, "\n", outfilename, "\r\n")
-fun dos2unix(infilename, outfilename) = convertNewlines(infilename, "\r\n", outfilename, "\n")
