@@ -4,6 +4,8 @@ exception MisplacedQuote of string;
 exception IllegalCharacter of string;
 exception CorruptedFile of string;
 
+(* Reads the file 'filename' and returns the string content *)
+(* Raises an emptyInputFile Exception if the input file is empty *)
 fun readFile filename =
     let
       val instream = TextIO.openIn filename
@@ -16,6 +18,8 @@ fun readFile filename =
         content
     end;
 
+
+(* Writes to the file filename the content string *)
 fun writeFile filename content =
     let
       val outstream = TextIO.openOut filename
@@ -26,6 +30,17 @@ fun writeFile filename content =
     end;
 
 
+(* 
+  
+  The states indicate the states of the DFA
+  
+  start -> It indicates that the parser is ready to read the next field in the record
+  singleQuote -> It indicates that the parser is currently parsing a field that had a single quote.
+  doubleQuote -> It indicates that the parser has encountered two consecutive quotes.
+  unquotedField -> It indicates that the parser has encountered a field that was not surrounded by quotes.
+  eol -> This indicates that the parser has reached the end of line.
+  
+  *)
 fun convertDelimiters(infilename, delim1, outfilename, delim2) = 
 let
   datatype states = start | singleQuote | unquotedField | doubleQuote | eol 
