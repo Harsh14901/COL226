@@ -1,0 +1,15 @@
+start ::= program EOF .
+program ::= {statement} .
+statement ::= A ";" .
+A ::= F | B .
+B ::= C "IMPLIES" B | C .
+C ::= C BINOP D | D .
+D ::= "NOT" E | E .
+E ::= "(" A ")" | OPERAND | F .
+F ::= "IF" B "THEN" B "ELSE" A .
+
+BINOP ::= "AND" | "OR" | "XOR" | "EQUALS" .
+
+CONST ::= "TRUE" | "FALSE" .
+OPERAND ::= CONST | ID .
+ID ::= {[a-zA-Z]} .
