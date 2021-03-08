@@ -37,11 +37,10 @@
 %right NOT
 %nonassoc LPAREN RPAREN
 %% 
-program : statementSet        (statementSet1 ^ ", program : statementSet\n")
+program :statement statementSet        (statementSet1 ^ ", program : statementSet\n")
 statementSet :                (", statementSet :")
 | statement statementSet      (statement1 ^ ", " ^ statementSet1 ^ ", statement : statement statementSet") 
 statement : EXP TERM          (EXP1 ^ ", " ^ TERM1 ^ ", statement : EXP TERM")
-| TERM                        (TERM1 ^ ", " ^ "statement : TERM, ")
 
 EXP : CONST                   (CONST1 ^ ", EXP: CONST")
   | ID                        (ID1 ^ ", EXP: ID")
