@@ -10,7 +10,6 @@ structure Header =
 struct
 
 (* Some user decl here *)
-datatype 'a BTree = Null | Node of 'a BTree * 'a * 'a BTree;
 
 
 end
@@ -147,10 +146,9 @@ structure MlyValue =
 struct
 datatype svalue = VOID | ntVOID of unit ->  unit
  | ID of unit ->  (string) | CONST of unit ->  (string)
- | EXP of unit ->  (string) | program of unit ->  (string)
 end
 type svalue = MlyValue.svalue
-type result = string
+type result = unit
 end
 structure EC=
 struct
@@ -195,94 +193,95 @@ val actions =
 fn (i392,defaultPos,stack,
     (()):arg) =>
 case (i392,stack)
-of  ( 0, ( ( _, ( _, _, TERM1right)) :: ( _, ( MlyValue.EXP EXP1, 
-EXP1left, _)) :: rest671)) => let val  result = MlyValue.program (fn _
- => let val  EXP1 = EXP1 ()
- in ("[ " ^ EXP1 ^ "]")
-end)
+of  ( 0, ( ( _, ( _, _, TERM1right)) :: ( _, ( MlyValue.ntVOID EXP1, 
+EXP1left, _)) :: rest671)) => let val  result = MlyValue.ntVOID (fn _
+ => ( let val  (EXP as EXP1) = EXP1 ()
+ in (print("program : EXP TERM\n"))
+end; ()))
  in ( LrTable.NT 0, ( result, EXP1left, TERM1right), rest671)
 end
 |  ( 1, ( ( _, ( MlyValue.CONST CONST1, CONST1left, CONST1right)) :: 
-rest671)) => let val  result = MlyValue.EXP (fn _ => let val  (CONST
- as CONST1) = CONST1 ()
- in ("CONST: "^CONST1 ^", ")
-end)
+rest671)) => let val  result = MlyValue.ntVOID (fn _ => ( let val  (
+CONST as CONST1) = CONST1 ()
+ in (print("CONST "^CONST1 ^", "))
+end; ()))
  in ( LrTable.NT 1, ( result, CONST1left, CONST1right), rest671)
 end
 |  ( 2, ( ( _, ( MlyValue.ID ID1, ID1left, ID1right)) :: rest671)) =>
- let val  result = MlyValue.EXP (fn _ => let val  (ID as ID1) = ID1 ()
- in ("ID: "^ID1 ^ ", ")
-end)
+ let val  result = MlyValue.ntVOID (fn _ => ( let val  (ID as ID1) = 
+ID1 ()
+ in (print("ID "^ID1 ^ ", "))
+end; ()))
  in ( LrTable.NT 1, ( result, ID1left, ID1right), rest671)
 end
-|  ( 3, ( ( _, ( MlyValue.EXP EXP1, _, EXP1right)) :: ( _, ( _, 
-NOT1left, _)) :: rest671)) => let val  result = MlyValue.EXP (fn _ =>
- let val  EXP1 = EXP1 ()
- in ("NOT " ^ EXP1 ^ ", ")
-end)
+|  ( 3, ( ( _, ( MlyValue.ntVOID EXP1, _, EXP1right)) :: ( _, ( _, 
+NOT1left, _)) :: rest671)) => let val  result = MlyValue.ntVOID (fn _
+ => ( let val  (EXP as EXP1) = EXP1 ()
+ in (print("EXP: NOT EXP1, "))
+end; ()))
  in ( LrTable.NT 1, ( result, NOT1left, EXP1right), rest671)
 end
-|  ( 4, ( ( _, ( MlyValue.EXP EXP2, _, EXP2right)) :: _ :: ( _, ( 
-MlyValue.EXP EXP1, EXP1left, _)) :: rest671)) => let val  result = 
-MlyValue.EXP (fn _ => let val  EXP1 = EXP1 ()
+|  ( 4, ( ( _, ( MlyValue.ntVOID EXP2, _, EXP2right)) :: _ :: ( _, ( 
+MlyValue.ntVOID EXP1, EXP1left, _)) :: rest671)) => let val  result = 
+MlyValue.ntVOID (fn _ => ( let val  (EXP as EXP1) = EXP1 ()
  val  EXP2 = EXP2 ()
- in (EXP1 ^ " AND " ^ EXP2 ^ ", ")
-end)
+ in (print("EXP: EXP1 AND EXP2, "))
+end; ()))
  in ( LrTable.NT 1, ( result, EXP1left, EXP2right), rest671)
 end
-|  ( 5, ( ( _, ( MlyValue.EXP EXP2, _, EXP2right)) :: _ :: ( _, ( 
-MlyValue.EXP EXP1, EXP1left, _)) :: rest671)) => let val  result = 
-MlyValue.EXP (fn _ => let val  EXP1 = EXP1 ()
+|  ( 5, ( ( _, ( MlyValue.ntVOID EXP2, _, EXP2right)) :: _ :: ( _, ( 
+MlyValue.ntVOID EXP1, EXP1left, _)) :: rest671)) => let val  result = 
+MlyValue.ntVOID (fn _ => ( let val  (EXP as EXP1) = EXP1 ()
  val  EXP2 = EXP2 ()
- in (EXP1 ^ " OR " ^ EXP2 ^ ", ")
-end)
+ in (print("EXP: EXP1 OR EXP2, "))
+end; ()))
  in ( LrTable.NT 1, ( result, EXP1left, EXP2right), rest671)
 end
-|  ( 6, ( ( _, ( MlyValue.EXP EXP2, _, EXP2right)) :: _ :: ( _, ( 
-MlyValue.EXP EXP1, EXP1left, _)) :: rest671)) => let val  result = 
-MlyValue.EXP (fn _ => let val  EXP1 = EXP1 ()
+|  ( 6, ( ( _, ( MlyValue.ntVOID EXP2, _, EXP2right)) :: _ :: ( _, ( 
+MlyValue.ntVOID EXP1, EXP1left, _)) :: rest671)) => let val  result = 
+MlyValue.ntVOID (fn _ => ( let val  (EXP as EXP1) = EXP1 ()
  val  EXP2 = EXP2 ()
- in (EXP1 ^ " XOR " ^ EXP2 ^ ", ")
-end)
+ in (print("EXP: EXP1 XOR EXP2, "))
+end; ()))
  in ( LrTable.NT 1, ( result, EXP1left, EXP2right), rest671)
 end
-|  ( 7, ( ( _, ( MlyValue.EXP EXP2, _, EXP2right)) :: _ :: ( _, ( 
-MlyValue.EXP EXP1, EXP1left, _)) :: rest671)) => let val  result = 
-MlyValue.EXP (fn _ => let val  EXP1 = EXP1 ()
+|  ( 7, ( ( _, ( MlyValue.ntVOID EXP2, _, EXP2right)) :: _ :: ( _, ( 
+MlyValue.ntVOID EXP1, EXP1left, _)) :: rest671)) => let val  result = 
+MlyValue.ntVOID (fn _ => ( let val  (EXP as EXP1) = EXP1 ()
  val  EXP2 = EXP2 ()
- in (EXP1 ^ " EQUALS " ^ EXP2 ^ ", ")
-end)
+ in (print("EXP: EXP1 EQUALS EXP2, "))
+end; ()))
  in ( LrTable.NT 1, ( result, EXP1left, EXP2right), rest671)
 end
-|  ( 8, ( ( _, ( MlyValue.EXP EXP2, _, EXP2right)) :: _ :: ( _, ( 
-MlyValue.EXP EXP1, EXP1left, _)) :: rest671)) => let val  result = 
-MlyValue.EXP (fn _ => let val  EXP1 = EXP1 ()
+|  ( 8, ( ( _, ( MlyValue.ntVOID EXP2, _, EXP2right)) :: _ :: ( _, ( 
+MlyValue.ntVOID EXP1, EXP1left, _)) :: rest671)) => let val  result = 
+MlyValue.ntVOID (fn _ => ( let val  (EXP as EXP1) = EXP1 ()
  val  EXP2 = EXP2 ()
- in (EXP1 ^ " IMPLIES " ^ EXP2 ^ ", ")
-end)
+ in (print("EXP: EXP1 IMPLIES EXP2, "))
+end; ()))
  in ( LrTable.NT 1, ( result, EXP1left, EXP2right), rest671)
 end
-|  ( 9, ( ( _, ( MlyValue.EXP EXP3, _, EXP3right)) :: _ :: ( _, ( 
-MlyValue.EXP EXP2, _, _)) :: _ :: ( _, ( MlyValue.EXP EXP1, _, _)) :: 
-( _, ( _, IF1left, _)) :: rest671)) => let val  result = MlyValue.EXP
- (fn _ => let val  EXP1 = EXP1 ()
+|  ( 9, ( ( _, ( MlyValue.ntVOID EXP3, _, EXP3right)) :: _ :: ( _, ( 
+MlyValue.ntVOID EXP2, _, _)) :: _ :: ( _, ( MlyValue.ntVOID EXP1, _, _
+)) :: ( _, ( _, IF1left, _)) :: rest671)) => let val  result = 
+MlyValue.ntVOID (fn _ => ( let val  (EXP as EXP1) = EXP1 ()
  val  EXP2 = EXP2 ()
  val  EXP3 = EXP3 ()
- in ("IF " ^ EXP1 ^ " THEN " ^ EXP2 ^ " ELSE " ^ EXP3 ^ ", ")
-end)
+ in (print("EXP: IF EXP1 THEN EXP2 ELSE EXP3, "))
+end; ()))
  in ( LrTable.NT 1, ( result, IF1left, EXP3right), rest671)
 end
-|  ( 10, ( ( _, ( _, _, RPAREN1right)) :: ( _, ( MlyValue.EXP EXP1, _,
- _)) :: ( _, ( _, LPAREN1left, _)) :: rest671)) => let val  result = 
-MlyValue.EXP (fn _ => let val  EXP1 = EXP1 ()
- in ("("^EXP1^"), ")
-end)
+|  ( 10, ( ( _, ( _, _, RPAREN1right)) :: ( _, ( MlyValue.ntVOID EXP1,
+ _, _)) :: ( _, ( _, LPAREN1left, _)) :: rest671)) => let val  result
+ = MlyValue.ntVOID (fn _ => ( let val  (EXP as EXP1) = EXP1 ()
+ in (print("EXP: LPAREN EXP1 RPAREN, "))
+end; ()))
  in ( LrTable.NT 1, ( result, LPAREN1left, RPAREN1right), rest671)
 end
 | _ => raise (mlyAction i392)
 end
 val void = MlyValue.VOID
-val extract = fn a => (fn MlyValue.program x => x
+val extract = fn a => (fn MlyValue.ntVOID x => x
 | _ => let exception ParseInternal
 	in raise ParseInternal end) a ()
 end
