@@ -1,0 +1,9 @@
+local
+  $(SML_LIB)/basis/basis.mlb
+  $(SML_LIB)/mlyacc-lib/mlyacc-lib.mlb
+  bool_parser.yacc.sig
+  bool_parser.yacc.sml
+  bool_expr.lex.sml
+in
+  loader.sml
+end

@@ -23,6 +23,7 @@ program : statementSet        (print("program : statementSet\n"))
 statementSet :                (print("statementSet :, "))
 | statement statementSet      (print("statement : statement statementSet, "))               
 statement : EXP TERM          (print("statement : EXP TERM, "))
+| TERM                        (print("statement : TERM, "))
 
 EXP : CONST                   (print("CONST "^CONST1 ^", "))
   | ID                        (print("ID "^ID1 ^ ", "))
@@ -34,5 +35,4 @@ EXP : CONST                   (print("CONST "^CONST1 ^", "))
   | EXP IMPLIES EXP           (print("EXP: EXP1 IMPLIES EXP2, "))
   | IF EXP THEN EXP ELSE EXP  (print("EXP: IF EXP1 THEN EXP2 ELSE EXP3, "))
   | LPAREN EXP RPAREN         (print("EXP: LPAREN EXP1 RPAREN, "))
-  |                           (print("EXP:, "))
   

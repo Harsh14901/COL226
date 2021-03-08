@@ -1,13 +1,6 @@
-CM.make("$/basis.cm");
-CM.make("$/ml-yacc-lib.cm");
-use "bool_parser.yacc.sig";
-use "bool_parser.yacc.sml";
-use "bool_expr.lex.sml";
-Control.Print.printLength := 1000; (* set printing parameters so that *)
-Control.Print.printDepth := 1000; (* we’ll see all details *)
-Control.Print.stringDepth := 1000; (* and strings *)
-
 exception SyntaxError;
+exception EmptyInputFile
+exception InvalidUsage
 
 (* Parser structure *)
 structure BoolLrVals =
@@ -25,7 +18,7 @@ structure BoolParser=
 val dummyEOF = BoolLrVals.Tokens.EOF(0,0)
 
 fun print_err (s, linenum, charpos) = (
-  print("Syntax Error:" ^ Int.toString(linenum) ^ ":" ^ Int.toString(charpos) ^ ":" ^"<prod_rule>");
+  print("Syntax Error:" ^ Int.toString(linenum) ^ ":" ^ Int.toString(charpos) ^ ":" ^s^"\n");
   raise SyntaxError;
   ()
 );
@@ -50,3 +43,33 @@ fun parse (lexer) =
   end
 
 val parseString = parse o stringToLexer
+
+fun readFile filename =
+  let
+    val instream = TextIO.openIn filename
+    val content = TextIO.inputAll instream handle e => (TextIO.closeIn instream; raise e)
+    val _ = TextIO.closeIn instream
+  in 
+    if String.size(content) = 0 then 
+      raise EmptyInputFile
+    else
+      content
+  end;
+
+
+fun main() = 
+  let
+    val args = CommandLine.arguments();
+  in
+    if(length(args) = 0) then
+      (print("Usage: ./a2 <filename>\n"); raise InvalidUsage; ())
+    else
+      let
+        val filename = hd(args)
+        val content = readFile filename
+      in
+        (parseString(content); ())
+      end
+  end
+
+val _ = main()
