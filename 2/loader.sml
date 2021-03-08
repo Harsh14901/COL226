@@ -22,6 +22,8 @@ structure BoolParser=
           structure Lex=BoolLex
           structure LrParser=LrParser)
 
+val dummyEOF = BoolLrVals.Tokens.EOF(0,0)
+
 fun print_err (s, linenum, charpos) = (
   print("Syntax Error:" ^ Int.toString(linenum) ^ ":" ^ Int.toString(charpos) ^ ":" ^"<prod_rule>");
   raise SyntaxError;
@@ -33,14 +35,13 @@ fun invoke lexstream = BoolParser.parse(0,lexstream,print_err,());
 fun stringToLexer str =
   let 
     val done = ref false
-    val lexer=  BoolParser.makeLexer (fn _ => if (!done) then "" else (done:=true;str))
+    val lexer =  BoolParser.makeLexer (fn _ => if (!done) then "" else (done:=true;str))
   in
     lexer
   end	
 
 fun parse (lexer) =
   let 
-    val dummyEOF = BoolLrVals.Tokens.EOF(0,0)
     val (result, lexer) = invoke lexer
     val (nextToken, lexer) = BoolParser.Stream.get lexer
   in

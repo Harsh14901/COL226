@@ -4,12 +4,22 @@ functor BoolLexFun(structure Tokens : Bool_TOKENS)=
       struct
 exception InvalidToken;
 (* datatype lexresult =  EOF | TERM | CONST of string | NOT | AND | OR | XOR | EQUALS | IMPLIES | IF | THEN | ELSE | LPAREN | RPAREN | ID of string *)
+val lexOut : string list ref = ref []
 val linep = ref 1
 val error = fn (char, linenum, pos) => (
   print("Unknown token:" ^ Int.toString(linenum) ^ ":" ^ Int.toString(pos) ^ ":" ^ char ^ "\n");
   raise InvalidToken
 );
-val eof = fn () => Tokens.EOF(!linep, !linep)
+val eof = fn () => 
+  let
+    val accumulate = fn(next, res) => res ^ ", " ^ next
+    val revOut = List.rev (!lexOut)
+    val output = List.foldl accumulate ("[" ^ hd(revOut)) (tl(revOut))
+
+    val _ = (lexOut := []; print(output ^ "]\n"))
+  in
+    Tokens.EOF(!linep, !linep)
+  end
 fun refinc x =  (x := !x + 1; !x)
 
 type pos = int
@@ -491,22 +501,22 @@ let fun continue() = lex() in
 			(* Application actions *)
 
   1 => (refinc linep; lex())
-| 10 => (Tokens.NOT(!linep, yypos))
-| 14 => (Tokens.AND(!linep, yypos))
-| 17 => (Tokens.OR(!linep, yypos))
-| 21 => (Tokens.XOR(!linep, yypos))
-| 28 => (Tokens.EQUALS(!linep, yypos))
-| 36 => (Tokens.IMPLIES(!linep, yypos))
-| 39 => (Tokens.IF(!linep, yypos))
+| 10 => (lexOut :="NOT \"NOT\"" :: !lexOut; Tokens.NOT(!linep, yypos))
+| 14 => (lexOut :="AND \"AND\"" :: !lexOut; Tokens.AND(!linep, yypos))
+| 17 => (lexOut :="OR \"OR\"" :: !lexOut; Tokens.OR(!linep, yypos))
+| 21 => (lexOut :="XOR \"XOR\"" :: !lexOut; Tokens.XOR(!linep, yypos))
+| 28 => (lexOut :="EQUALS \"EQUALS\"" :: !lexOut; Tokens.EQUALS(!linep, yypos))
+| 36 => (lexOut :="IMPLIES \"IMPLIES\"" :: !lexOut; Tokens.IMPLIES(!linep, yypos))
+| 39 => (lexOut :="IF \"IF\"" :: !lexOut; Tokens.IF(!linep, yypos))
 | 4 => (lex())
-| 44 => (Tokens.THEN(!linep, yypos))
-| 49 => (Tokens.ELSE(!linep, yypos))
-| 51 => (Tokens.LPAREN(!linep, yypos))
-| 53 => (Tokens.RPAREN(!linep, yypos))
-| 58 => (Tokens.CONST("TRUE", !linep, yypos))
-| 6 => (Tokens.TERM(!linep, yypos))
-| 64 => (Tokens.CONST("FALSE", !linep, yypos))
-| 67 => let val yytext=yymktext() in Tokens.ID(yytext, !linep, yypos) end
+| 44 => (lexOut :="THEN \"THEN\"" :: !lexOut; Tokens.THEN(!linep, yypos))
+| 49 => (lexOut :="ELSE \"ELSE\"" :: !lexOut; Tokens.ELSE(!linep, yypos))
+| 51 => (lexOut :="LPAREN \"(\"" :: !lexOut; Tokens.LPAREN(!linep, yypos))
+| 53 => (lexOut :="RPAREN \")\"" :: !lexOut; Tokens.RPAREN(!linep, yypos))
+| 58 => (lexOut :="CONST \"TRUE\"" :: !lexOut; Tokens.CONST("TRUE", !linep, yypos))
+| 6 => (lexOut :="TERM \";\"" :: !lexOut; Tokens.TERM(!linep, yypos))
+| 64 => (lexOut :="CONST \"FALSE\"" :: !lexOut; Tokens.CONST("FALSE", !linep, yypos))
+| 67 => let val yytext=yymktext() in lexOut :="ID \"" ^ yytext ^ "\"" :: !lexOut; Tokens.ID(yytext, !linep, yypos) end
 | 69 => let val yytext=yymktext() in error (yytext ,!linep ,yypos); lex() end
 | _ => raise Internal.LexerError
 

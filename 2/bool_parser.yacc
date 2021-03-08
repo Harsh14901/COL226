@@ -1,6 +1,5 @@
 
 (* Some user decl here *)
-datatype 'a BTree = Null | Node of 'a BTree * 'a * 'a BTree;
 
 %%
 
