@@ -46,7 +46,7 @@ fun parse (lexer) =
     val (nextToken, lexer) = BoolParser.Stream.get lexer
   in
     if BoolParser.sameToken(nextToken, dummyEOF) then result
-    else (TextIO.output(TextIO.stdOut, "Warning: Unconsumed input \n"); result)
+    else parse(lexer)
   end
 
 val parseString = parse o stringToLexer

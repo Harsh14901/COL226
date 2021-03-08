@@ -19,70 +19,79 @@ local open LrTable in
 val table=let val actionRows =
 "\
 \\001\000\001\000\000\000\002\000\000\000\000\000\
-\\001\000\002\000\014\000\005\000\013\000\006\000\012\000\007\000\011\000\
-\\008\000\010\000\009\000\009\000\000\000\
-\\001\000\003\000\008\000\004\000\007\000\010\000\006\000\013\000\005\000\
-\\015\000\004\000\000\000\
-\\001\000\005\000\013\000\006\000\012\000\007\000\011\000\008\000\010\000\
-\\009\000\009\000\011\000\024\000\000\000\
-\\001\000\005\000\013\000\006\000\012\000\007\000\011\000\008\000\010\000\
-\\009\000\009\000\012\000\026\000\000\000\
-\\001\000\005\000\013\000\006\000\012\000\007\000\011\000\008\000\010\000\
-\\009\000\009\000\014\000\023\000\000\000\
-\\029\000\000\000\
-\\030\000\000\000\
-\\031\000\000\000\
+\\001\000\001\000\033\000\002\000\033\000\003\000\010\000\004\000\009\000\
+\\005\000\046\000\006\000\046\000\007\000\046\000\008\000\046\000\
+\\009\000\046\000\010\000\008\000\013\000\007\000\015\000\006\000\000\000\
+\\001\000\002\000\016\000\005\000\015\000\006\000\014\000\007\000\013\000\
+\\008\000\012\000\009\000\011\000\000\000\
+\\001\000\005\000\015\000\006\000\014\000\007\000\013\000\008\000\012\000\
+\\009\000\011\000\011\000\027\000\000\000\
+\\001\000\005\000\015\000\006\000\014\000\007\000\013\000\008\000\012\000\
+\\009\000\011\000\012\000\029\000\000\000\
+\\001\000\005\000\015\000\006\000\014\000\007\000\013\000\008\000\012\000\
+\\009\000\011\000\014\000\026\000\000\000\
 \\032\000\000\000\
-\\033\000\000\000\
 \\034\000\000\000\
 \\035\000\000\000\
 \\036\000\000\000\
-\\037\000\005\000\013\000\006\000\012\000\007\000\011\000\008\000\010\000\
-\\009\000\009\000\000\000\
-\\038\000\005\000\013\000\006\000\012\000\007\000\011\000\008\000\010\000\
-\\009\000\009\000\000\000\
+\\037\000\000\000\
+\\038\000\000\000\
 \\039\000\000\000\
+\\040\000\000\000\
+\\041\000\000\000\
+\\042\000\000\000\
+\\043\000\005\000\015\000\006\000\014\000\007\000\013\000\008\000\012\000\
+\\009\000\011\000\000\000\
+\\044\000\005\000\015\000\006\000\014\000\007\000\013\000\008\000\012\000\
+\\009\000\011\000\000\000\
+\\045\000\000\000\
+\\046\000\003\000\010\000\004\000\009\000\010\000\008\000\013\000\007\000\
+\\015\000\006\000\000\000\
 \"
 val actionRowNumbers =
-"\002\000\001\000\008\000\002\000\
-\\002\000\002\000\007\000\002\000\
-\\002\000\002\000\002\000\002\000\
-\\006\000\005\000\003\000\009\000\
-\\014\000\013\000\012\000\011\000\
-\\010\000\016\000\002\000\004\000\
-\\002\000\015\000\000\000"
+"\001\000\002\000\006\000\001\000\
+\\010\000\019\000\019\000\019\000\
+\\009\000\019\000\019\000\019\000\
+\\019\000\019\000\008\000\007\000\
+\\005\000\003\000\011\000\016\000\
+\\015\000\014\000\013\000\012\000\
+\\018\000\019\000\004\000\019\000\
+\\017\000\000\000"
 val gotoT =
 "\
-\\001\000\026\000\002\000\001\000\000\000\
+\\001\000\003\000\002\000\002\000\003\000\001\000\004\000\029\000\000\000\
 \\000\000\
 \\000\000\
-\\002\000\013\000\000\000\
-\\002\000\014\000\000\000\
-\\002\000\015\000\000\000\
+\\001\000\003\000\002\000\015\000\003\000\001\000\000\000\
 \\000\000\
-\\002\000\016\000\000\000\
-\\002\000\017\000\000\000\
-\\002\000\018\000\000\000\
-\\002\000\019\000\000\000\
-\\002\000\020\000\000\000\
+\\003\000\016\000\000\000\
+\\003\000\017\000\000\000\
+\\003\000\018\000\000\000\
 \\000\000\
-\\000\000\
-\\000\000\
-\\000\000\
-\\000\000\
+\\003\000\019\000\000\000\
+\\003\000\020\000\000\000\
+\\003\000\021\000\000\000\
+\\003\000\022\000\000\000\
+\\003\000\023\000\000\000\
 \\000\000\
 \\000\000\
 \\000\000\
 \\000\000\
 \\000\000\
-\\002\000\023\000\000\000\
 \\000\000\
-\\002\000\025\000\000\000\
+\\000\000\
+\\000\000\
+\\000\000\
+\\000\000\
+\\000\000\
+\\003\000\026\000\000\000\
+\\000\000\
+\\003\000\028\000\000\000\
 \\000\000\
 \\000\000\
 \"
-val numstates = 27
-val numrules = 11
+val numstates = 30
+val numrules = 15
 val s = ref "" and index = ref 0
 val string_to_int = fn () => 
 let val i = !index
@@ -193,75 +202,98 @@ val actions =
 fn (i392,defaultPos,stack,
     (()):arg) =>
 case (i392,stack)
-of  ( 0, ( ( _, ( _, _, TERM1right)) :: ( _, ( MlyValue.ntVOID EXP1, 
+of  ( 0, ( ( _, ( MlyValue.ntVOID statementSet1, statementSet1left, 
+statementSet1right)) :: rest671)) => let val  result = MlyValue.ntVOID
+ (fn _ => ( let val  (statementSet as statementSet1) = statementSet1
+ ()
+ in (print("program : statementSet\n"))
+end; ()))
+ in ( LrTable.NT 3, ( result, statementSet1left, statementSet1right), 
+rest671)
+end
+|  ( 1, ( rest671)) => let val  result = MlyValue.ntVOID (fn _ => (
+print("statementSet :, ")))
+ in ( LrTable.NT 1, ( result, defaultPos, defaultPos), rest671)
+end
+|  ( 2, ( ( _, ( MlyValue.ntVOID statementSet1, _, statementSet1right)
+) :: ( _, ( MlyValue.ntVOID statement1, statement1left, _)) :: rest671
+)) => let val  result = MlyValue.ntVOID (fn _ => ( let val  (statement
+ as statement1) = statement1 ()
+ val  (statementSet as statementSet1) = statementSet1 ()
+ in (print("statement : statement statementSet, "))
+end; ()))
+ in ( LrTable.NT 1, ( result, statement1left, statementSet1right), 
+rest671)
+end
+|  ( 3, ( ( _, ( _, _, TERM1right)) :: ( _, ( MlyValue.ntVOID EXP1, 
 EXP1left, _)) :: rest671)) => let val  result = MlyValue.ntVOID (fn _
  => ( let val  (EXP as EXP1) = EXP1 ()
- in (print("program : EXP TERM\n"))
+ in (print("statement : EXP TERM, "))
 end; ()))
  in ( LrTable.NT 0, ( result, EXP1left, TERM1right), rest671)
 end
-|  ( 1, ( ( _, ( MlyValue.CONST CONST1, CONST1left, CONST1right)) :: 
+|  ( 4, ( ( _, ( MlyValue.CONST CONST1, CONST1left, CONST1right)) :: 
 rest671)) => let val  result = MlyValue.ntVOID (fn _ => ( let val  (
 CONST as CONST1) = CONST1 ()
  in (print("CONST "^CONST1 ^", "))
 end; ()))
- in ( LrTable.NT 1, ( result, CONST1left, CONST1right), rest671)
+ in ( LrTable.NT 2, ( result, CONST1left, CONST1right), rest671)
 end
-|  ( 2, ( ( _, ( MlyValue.ID ID1, ID1left, ID1right)) :: rest671)) =>
+|  ( 5, ( ( _, ( MlyValue.ID ID1, ID1left, ID1right)) :: rest671)) =>
  let val  result = MlyValue.ntVOID (fn _ => ( let val  (ID as ID1) = 
 ID1 ()
  in (print("ID "^ID1 ^ ", "))
 end; ()))
- in ( LrTable.NT 1, ( result, ID1left, ID1right), rest671)
+ in ( LrTable.NT 2, ( result, ID1left, ID1right), rest671)
 end
-|  ( 3, ( ( _, ( MlyValue.ntVOID EXP1, _, EXP1right)) :: ( _, ( _, 
+|  ( 6, ( ( _, ( MlyValue.ntVOID EXP1, _, EXP1right)) :: ( _, ( _, 
 NOT1left, _)) :: rest671)) => let val  result = MlyValue.ntVOID (fn _
  => ( let val  (EXP as EXP1) = EXP1 ()
  in (print("EXP: NOT EXP1, "))
 end; ()))
- in ( LrTable.NT 1, ( result, NOT1left, EXP1right), rest671)
-end
-|  ( 4, ( ( _, ( MlyValue.ntVOID EXP2, _, EXP2right)) :: _ :: ( _, ( 
-MlyValue.ntVOID EXP1, EXP1left, _)) :: rest671)) => let val  result = 
-MlyValue.ntVOID (fn _ => ( let val  (EXP as EXP1) = EXP1 ()
- val  EXP2 = EXP2 ()
- in (print("EXP: EXP1 AND EXP2, "))
-end; ()))
- in ( LrTable.NT 1, ( result, EXP1left, EXP2right), rest671)
-end
-|  ( 5, ( ( _, ( MlyValue.ntVOID EXP2, _, EXP2right)) :: _ :: ( _, ( 
-MlyValue.ntVOID EXP1, EXP1left, _)) :: rest671)) => let val  result = 
-MlyValue.ntVOID (fn _ => ( let val  (EXP as EXP1) = EXP1 ()
- val  EXP2 = EXP2 ()
- in (print("EXP: EXP1 OR EXP2, "))
-end; ()))
- in ( LrTable.NT 1, ( result, EXP1left, EXP2right), rest671)
-end
-|  ( 6, ( ( _, ( MlyValue.ntVOID EXP2, _, EXP2right)) :: _ :: ( _, ( 
-MlyValue.ntVOID EXP1, EXP1left, _)) :: rest671)) => let val  result = 
-MlyValue.ntVOID (fn _ => ( let val  (EXP as EXP1) = EXP1 ()
- val  EXP2 = EXP2 ()
- in (print("EXP: EXP1 XOR EXP2, "))
-end; ()))
- in ( LrTable.NT 1, ( result, EXP1left, EXP2right), rest671)
+ in ( LrTable.NT 2, ( result, NOT1left, EXP1right), rest671)
 end
 |  ( 7, ( ( _, ( MlyValue.ntVOID EXP2, _, EXP2right)) :: _ :: ( _, ( 
 MlyValue.ntVOID EXP1, EXP1left, _)) :: rest671)) => let val  result = 
 MlyValue.ntVOID (fn _ => ( let val  (EXP as EXP1) = EXP1 ()
  val  EXP2 = EXP2 ()
- in (print("EXP: EXP1 EQUALS EXP2, "))
+ in (print("EXP: EXP1 AND EXP2, "))
 end; ()))
- in ( LrTable.NT 1, ( result, EXP1left, EXP2right), rest671)
+ in ( LrTable.NT 2, ( result, EXP1left, EXP2right), rest671)
 end
 |  ( 8, ( ( _, ( MlyValue.ntVOID EXP2, _, EXP2right)) :: _ :: ( _, ( 
 MlyValue.ntVOID EXP1, EXP1left, _)) :: rest671)) => let val  result = 
 MlyValue.ntVOID (fn _ => ( let val  (EXP as EXP1) = EXP1 ()
  val  EXP2 = EXP2 ()
+ in (print("EXP: EXP1 OR EXP2, "))
+end; ()))
+ in ( LrTable.NT 2, ( result, EXP1left, EXP2right), rest671)
+end
+|  ( 9, ( ( _, ( MlyValue.ntVOID EXP2, _, EXP2right)) :: _ :: ( _, ( 
+MlyValue.ntVOID EXP1, EXP1left, _)) :: rest671)) => let val  result = 
+MlyValue.ntVOID (fn _ => ( let val  (EXP as EXP1) = EXP1 ()
+ val  EXP2 = EXP2 ()
+ in (print("EXP: EXP1 XOR EXP2, "))
+end; ()))
+ in ( LrTable.NT 2, ( result, EXP1left, EXP2right), rest671)
+end
+|  ( 10, ( ( _, ( MlyValue.ntVOID EXP2, _, EXP2right)) :: _ :: ( _, ( 
+MlyValue.ntVOID EXP1, EXP1left, _)) :: rest671)) => let val  result = 
+MlyValue.ntVOID (fn _ => ( let val  (EXP as EXP1) = EXP1 ()
+ val  EXP2 = EXP2 ()
+ in (print("EXP: EXP1 EQUALS EXP2, "))
+end; ()))
+ in ( LrTable.NT 2, ( result, EXP1left, EXP2right), rest671)
+end
+|  ( 11, ( ( _, ( MlyValue.ntVOID EXP2, _, EXP2right)) :: _ :: ( _, ( 
+MlyValue.ntVOID EXP1, EXP1left, _)) :: rest671)) => let val  result = 
+MlyValue.ntVOID (fn _ => ( let val  (EXP as EXP1) = EXP1 ()
+ val  EXP2 = EXP2 ()
  in (print("EXP: EXP1 IMPLIES EXP2, "))
 end; ()))
- in ( LrTable.NT 1, ( result, EXP1left, EXP2right), rest671)
+ in ( LrTable.NT 2, ( result, EXP1left, EXP2right), rest671)
 end
-|  ( 9, ( ( _, ( MlyValue.ntVOID EXP3, _, EXP3right)) :: _ :: ( _, ( 
+|  ( 12, ( ( _, ( MlyValue.ntVOID EXP3, _, EXP3right)) :: _ :: ( _, ( 
 MlyValue.ntVOID EXP2, _, _)) :: _ :: ( _, ( MlyValue.ntVOID EXP1, _, _
 )) :: ( _, ( _, IF1left, _)) :: rest671)) => let val  result = 
 MlyValue.ntVOID (fn _ => ( let val  (EXP as EXP1) = EXP1 ()
@@ -269,14 +301,18 @@ MlyValue.ntVOID (fn _ => ( let val  (EXP as EXP1) = EXP1 ()
  val  EXP3 = EXP3 ()
  in (print("EXP: IF EXP1 THEN EXP2 ELSE EXP3, "))
 end; ()))
- in ( LrTable.NT 1, ( result, IF1left, EXP3right), rest671)
+ in ( LrTable.NT 2, ( result, IF1left, EXP3right), rest671)
 end
-|  ( 10, ( ( _, ( _, _, RPAREN1right)) :: ( _, ( MlyValue.ntVOID EXP1,
+|  ( 13, ( ( _, ( _, _, RPAREN1right)) :: ( _, ( MlyValue.ntVOID EXP1,
  _, _)) :: ( _, ( _, LPAREN1left, _)) :: rest671)) => let val  result
  = MlyValue.ntVOID (fn _ => ( let val  (EXP as EXP1) = EXP1 ()
  in (print("EXP: LPAREN EXP1 RPAREN, "))
 end; ()))
- in ( LrTable.NT 1, ( result, LPAREN1left, RPAREN1right), rest671)
+ in ( LrTable.NT 2, ( result, LPAREN1left, RPAREN1right), rest671)
+end
+|  ( 14, ( rest671)) => let val  result = MlyValue.ntVOID (fn _ => (
+print("EXP:, ")))
+ in ( LrTable.NT 2, ( result, defaultPos, defaultPos), rest671)
 end
 | _ => raise (mlyAction i392)
 end
