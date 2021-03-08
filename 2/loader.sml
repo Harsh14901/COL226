@@ -67,8 +67,9 @@ fun main() =
       let
         val filename = hd(args)
         val content = readFile filename
+        val output = parseString(content)
       in
-        (parseString(content); ())
+        print(output)
       end
   end
 

@@ -5,8 +5,26 @@
 
 %name Bool
 
-%term EOF | TERM | CONST of string | NOT | AND | OR | XOR | EQUALS | IMPLIES | IF | THEN | ELSE | LPAREN | RPAREN | ID of string
-%nonterm statement | statementSet | EXP | program
+%term EOF 
+| TERM of string
+| NOT of string 
+| AND of string 
+| OR of string 
+| XOR of string 
+| EQUALS of string 
+| IMPLIES of string 
+| IF of string 
+| THEN of string 
+| ELSE of string 
+| LPAREN of string 
+| RPAREN of string 
+| ID of string
+| CONST of string
+
+%nonterm statement of string 
+| statementSet of string 
+| EXP of string 
+| program of string
 
 %pos int
 
@@ -19,20 +37,20 @@
 %right NOT
 %nonassoc LPAREN RPAREN
 %% 
-program : statementSet        (print("program : statementSet\n"))
-statementSet :                (print("statementSet :, "))
-| statement statementSet      (print("statement : statement statementSet, "))               
-statement : EXP TERM          (print("statement : EXP TERM, "))
-| TERM                        (print("statement : TERM, "))
+program : statementSet        (statementSet1 ^ ", program : statementSet\n")
+statementSet :                (", statementSet :")
+| statement statementSet      (statement1 ^ ", " ^ statementSet1 ^ ", statement : statement statementSet") 
+statement : EXP TERM          (EXP1 ^ ", " ^ TERM1 ^ ", statement : EXP TERM")
+| TERM                        (TERM1 ^ ", " ^ "statement : TERM, ")
 
-EXP : CONST                   (print("CONST "^CONST1 ^", "))
-  | ID                        (print("ID "^ID1 ^ ", "))
-  | NOT EXP                   (print("EXP: NOT EXP1, "))
-  | EXP AND EXP               (print("EXP: EXP1 AND EXP2, "))
-  | EXP OR EXP                (print("EXP: EXP1 OR EXP2, "))
-  | EXP XOR EXP               (print("EXP: EXP1 XOR EXP2, "))
-  | EXP EQUALS EXP            (print("EXP: EXP1 EQUALS EXP2, "))
-  | EXP IMPLIES EXP           (print("EXP: EXP1 IMPLIES EXP2, "))
-  | IF EXP THEN EXP ELSE EXP  (print("EXP: IF EXP1 THEN EXP2 ELSE EXP3, "))
-  | LPAREN EXP RPAREN         (print("EXP: LPAREN EXP1 RPAREN, "))
+EXP : CONST                   (CONST1 ^ ", EXP: CONST")
+  | ID                        (ID1 ^ ", EXP: ID")
+  | NOT EXP                   (NOT1 ^ ", " ^ EXP1 ^ ", EXP: NOT EXP1")
+  | EXP AND EXP               (EXP1 ^ ", " ^ AND1 ^ ", " ^ EXP2 ^ ", EXP: EXP1 AND EXP2")
+  | EXP OR EXP                (EXP1 ^ ", " ^ OR1 ^ ", " ^ EXP2 ^ ", EXP: EXP1 OR EXP2")
+  | EXP XOR EXP               (EXP1 ^ ", " ^ XOR1 ^ ", " ^ EXP2 ^ ", EXP: EXP1 XOR EXP2")
+  | EXP EQUALS EXP            (EXP1 ^ ", " ^ EQUALS1 ^ ", " ^ EXP2 ^ ", EXP: EXP1 EQUALS EXP2")
+  | EXP IMPLIES EXP           (EXP1 ^ ", " ^ IMPLIES1 ^ ", " ^ EXP2 ^ ", EXP: EXP1 IMPLIES EXP2")
+  | IF EXP THEN EXP ELSE EXP  (IF1 ^ ", " ^ EXP1 ^ ", " ^ THEN1 ^ ", " ^ EXP2 ^ ", " ^ ELSE1 ^ ", " ^ EXP3 ^ ", EXP: IF EXP1 THEN EXP2 ELSE EXP3")
+  | LPAREN EXP RPAREN         (LPAREN1 ^ ", " ^ EXP1 ^ ", " ^ RPAREN1 ^ ", EXP: LPAREN EXP1 RPAREN")
   
