@@ -21,10 +21,10 @@
 | ID of string
 | CONST of string
 
-%nonterm statement of string 
-| statementSet of string 
+%nonterm Statement of string 
+| StatementSet of string 
 | EXP of string 
-| program of string
+| Program of string
 
 %pos int
 
@@ -37,10 +37,10 @@
 %right NOT
 %nonassoc LPAREN RPAREN
 %% 
-program :statement statementSet        (statementSet1 ^ ", program : statementSet\n")
-statementSet :                (", statementSet :")
-| statement statementSet      (statement1 ^ ", " ^ statementSet1 ^ ", statement : statement statementSet") 
-statement : EXP TERM          (EXP1 ^ ", " ^ TERM1 ^ ", statement : EXP TERM")
+Program :Statement StatementSet        (Statement1 ^ ", " ^ StatementSet1 ^ ", Program : Statement StatementSet\n")
+StatementSet :                ("StatementSet :")
+| Statement StatementSet      (Statement1 ^ ", " ^ StatementSet1 ^ ", Statement : Statement StatementSet") 
+Statement : EXP TERM          (EXP1 ^ ", " ^ TERM1 ^ ", Statement : EXP TERM")
 
 EXP : CONST                   (CONST1 ^ ", EXP: CONST")
   | ID                        (ID1 ^ ", EXP: ID")
