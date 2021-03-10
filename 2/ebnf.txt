@@ -1,15 +1,17 @@
-start ::= program EOF .
-program ::= {statement} .
-statement ::= A ";" .
-A ::= F | B .
-B ::= C "IMPLIES" B | C .
-C ::= C BINOP D | D .
-D ::= "NOT" E | E .
-E ::= "(" A ")" | OPERAND | F .
-F ::= "IF" B "THEN" B "ELSE" A .
+Program ::= Statement {Statement} .
+Statement ::= Formula ";" .
+Formula ::= ternary | Implication .
+Implication ::= BinaryOP "IMPLIES" ( Implication | ternary )  | BinaryOP .
+BinaryOP ::= BinaryOP BINOP ( Negation | ternary ) | Negation .
+Negation ::= "NOT" ( Negation | ternary ) | Term . 
+Term ::= "(" Formula ")" | OPERAND .
+ternary ::= "IF" Formula "THEN" Formula "ELSE" Formula .
 
 BINOP ::= "AND" | "OR" | "XOR" | "EQUALS" .
 
-CONST ::= "TRUE" | "FALSE" .
 OPERAND ::= CONST | ID .
-ID ::= {[a-zA-Z]} .
+CONST ::= "TRUE" | "FALSE" .
+ID ::= {LowerCase | UpperCase} .
+
+LowerCase ::= "a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | "i" | "j" | "k" | "l" | "m" | "n" | "o" | "p" | "q" | "r" | "s" | "t" | "u" | "v" | "w" | "x" | "y" | "z" . 
+UpperCase ::= "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H" | "I" | "J" | "K" | "L" | "M" | "N" | "O" | "P" | "Q" | "R" | "S" | "T" | "U" | "V" | "W" | "X" | "Y" | "Z" .
