@@ -13,3 +13,5 @@ clean:
 all: build
 	-make run file=${file}
 	make clean
+zip:
+	zip 2019CS10431.zip -x .git/* -x .gitignore -x test -x assignment2.pdf -r ./
