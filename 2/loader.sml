@@ -19,7 +19,7 @@ val dummyEOF = BoolLrVals.Tokens.EOF(0,0)
 
 fun print_err (s, linenum, charpos) = (
   print("Syntax Error:" ^ Int.toString(linenum) ^ ":" ^ Int.toString(charpos) ^ ":" ^s^"\n");
-  raise SyntaxError;
+  (*raise SyntaxError;*)
   ()
 );
 
