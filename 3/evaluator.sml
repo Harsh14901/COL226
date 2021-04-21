@@ -17,6 +17,8 @@ fun evalExp(e:exp, env:environment):value =
         in
             evalExp(e2, envAdd (x, v1, env))
         end	
+    | LetExp(FunDecl(fnName, Lambda(arg, argType, retType, body)), e) => evalExp(e, envAdd(fnName, LambdaVal(Lambda(arg,argType, retType, body)), env))
+    
     | NegateExp(e) => 
         (case evalExp(e, env) of 
             IntVal(i) => IntVal(~i)
@@ -37,6 +39,21 @@ fun evalExp(e:exp, env:environment):value =
         in 
             if b then v2 else v3
         end
+    | AppExp(e1, e2) =>
+        let
+            val LambdaVal(Lambda(arg,_,_, body)) = evalExp(e1, env)
+            val v = evalExp(e2, env)
+        in
+            evalExp(body, envAdd(arg, v, env))
+        end
+
+    | LambdaExp(Lambda(arg,argType, retType, body)) =>  
+        (case envLookupNoError(arg, env) of
+    
+            NULL => LambdaVal(Lambda(arg, argType, retType, substituteExp(body,env)))
+            | _ => LambdaVal(Lambda(arg, argType, retType, body))
+        )
+        
 and
 evalBinExp(b:binop, e1:exp, e2:exp, env:environment):value =
 case (b, evalExp(e1, env), evalExp(e2, env))  of
@@ -58,5 +75,42 @@ case (b, evalExp(e1, env), evalExp(e2, env)) of
     |   (Greater, StringVal s1, StringVal s2) => BoolVal (s1 > s2)
     |   (Less, IntVal i1, IntVal i2)  => BoolVal (i1 < i2)
     |   (Less, StringVal s1, StringVal s2) => BoolVal (s1 < s2)
-    | _ => raise brokenTypes;
+    | _ => raise brokenTypes
+and
+substituteExp(e: exp, env: environment): exp =
+    case e of 
+    VarExp(v) => 
+        (case envLookupNoError(v, env) of
+            IntVal(i) => NumExp(i)
+        |   StringVal(s) => StringExp(s)
+        |   BoolVal(b) => ConstExp(b)
+        |   LambdaVal(f) => LambdaExp(f)
+        |   NULL => VarExp(v))
+    | BinExp(b, e1, e2) => BinExp(b, substituteExp(e1, env), substituteExp(e2, env))
+    | BoolExp(b, e1, e2) => BoolExp(b, substituteExp(e1, env), substituteExp(e2, env))
+    | LetExp(ValDecl(x, e1), e2) => LetExp(ValDecl(x, substituteExp(e1, env)), substituteExp(e2,env))
+    | LetExp(FunDecl(fnName, Lambda(arg, argType, retType, body)), e) => 
+        let
+            val LambdaExp(newLambda) = substituteExp(LambdaExp(Lambda(arg, argType, retType, body)), env)
+            val newE = substituteExp(e, env)
+        in
+            (case envLookupNoError(fnName, env) of
+            
+                NULL => LetExp(FunDecl(fnName, newLambda), newE)
+                | _ => LetExp(FunDecl(fnName, Lambda(arg, argType, retType, body)), e)
+            )
+          
+        end
+    | NegateExp(e) => NegateExp(substituteExp(e, env))
+    | ConditionalExp(e1, e2, e3) => ConditionalExp(substituteExp(e1,env), substituteExp(e2,env), substituteExp(e3,env))
+    | AppExp(e1, e2) => AppExp(substituteExp(e1, env), substituteExp(e2, env))
+    | LambdaExp(Lambda(arg, argType, retType, body)) => 
+        (case envLookupNoError(arg, env) of
+    
+            NULL => LambdaExp(Lambda(arg, argType, retType, substituteExp(body,env)))
+            | _ => LambdaExp(Lambda(arg, argType, retType, body))
+        )
+    | NumExp(v) => NumExp(v)
+    | ConstExp(v) => ConstExp(v)
+    | StringExp(v) => StringExp(v)
 end

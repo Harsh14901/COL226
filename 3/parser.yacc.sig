@@ -5,6 +5,15 @@ type svalue
 val NUM: (int) *  'a * 'a -> (svalue,'a) token
 val CONST: (bool) *  'a * 'a -> (svalue,'a) token
 val ID: (string) *  'a * 'a -> (svalue,'a) token
+val REAL:  'a * 'a -> (svalue,'a) token
+val STRING:  'a * 'a -> (svalue,'a) token
+val BOOL:  'a * 'a -> (svalue,'a) token
+val INT:  'a * 'a -> (svalue,'a) token
+val DECLARROW:  'a * 'a -> (svalue,'a) token
+val ARROW:  'a * 'a -> (svalue,'a) token
+val COLON:  'a * 'a -> (svalue,'a) token
+val FUN:  'a * 'a -> (svalue,'a) token
+val FN:  'a * 'a -> (svalue,'a) token
 val VAL:  'a * 'a -> (svalue,'a) token
 val END:  'a * 'a -> (svalue,'a) token
 val IN:  'a * 'a -> (svalue,'a) token

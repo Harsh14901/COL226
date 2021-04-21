@@ -1,4 +1,4 @@
-(*#line 41.10 "lexer.lex"*)functor CalcLexFun(structure Tokens : Calc_TOKENS)(*#line 1.1 "lexer.lex.sml"*)
+(*#line 47.10 "lexer.lex"*)functor CalcLexFun(structure Tokens : Calc_TOKENS)(*#line 1.1 "lexer.lex.sml"*)
 =
    struct
     structure UserDeclarations =
@@ -34,7 +34,13 @@
    ("AND", Tokens.AND),
    ("OR", Tokens.OR),
    ("XOR", Tokens.XOR),
-   ("IMPLIES", Tokens.IMPLIES)
+   ("IMPLIES", Tokens.IMPLIES),
+   ("fn", Tokens.FN),
+   ("fun", Tokens.FUN),
+   ("int", Tokens.INT),
+   ("bool", Tokens.BOOL),
+   ("real", Tokens.REAL),
+   ("string", Tokens.STRING)
    
    ]
 
@@ -42,7 +48,7 @@
  ( case List.find (fn (s, _) => s = str )  keywords of 
   SOME (_, tk) => tk(pos1, pos2) 
   | NONE => Tokens.ID (str, pos1, pos2))
-  (*#line 45.1 "lexer.lex.sml"*)
+  (*#line 51.1 "lexer.lex.sml"*)
 end (* end of user routines *)
 exception LexError (* raised if illegal leaf action tried *)
 structure Internal =
@@ -65,10 +71,10 @@ val s = [
 \\000"
 ),
  (1, 
-"\003\003\003\003\003\003\003\003\003\027\029\003\003\003\003\003\
+"\003\003\003\003\003\003\003\003\003\030\032\003\003\003\003\003\
 \\003\003\003\003\003\003\003\003\003\003\003\003\003\003\003\003\
-\\027\003\003\003\003\003\003\003\026\025\024\023\003\022\003\003\
-\\020\020\020\020\020\020\020\020\020\020\003\019\018\017\016\003\
+\\030\003\003\003\003\003\003\003\029\028\027\026\003\024\003\003\
+\\022\022\022\022\022\022\022\022\022\022\021\020\019\017\016\003\
 \\003\005\005\005\005\005\011\005\005\005\005\005\005\005\005\005\
 \\005\005\005\005\007\005\005\005\005\005\005\003\003\003\003\003\
 \\003\005\005\005\005\005\005\005\005\005\005\005\005\005\005\005\
@@ -163,21 +169,43 @@ val s = [
 \\006\006\006\006\006\006\006\006\006\006\006\000\000\000\000\000\
 \\000"
 ),
- (20, 
+ (17, 
 "\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\
 \\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\
 \\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\
-\\021\021\021\021\021\021\021\021\021\021\000\000\000\000\000\000\
+\\000\000\000\000\000\000\000\000\000\000\000\000\000\000\018\000\
 \\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\
 \\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\
 \\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\
 \\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\
 \\000"
 ),
- (27, 
-"\000\000\000\000\000\000\000\000\000\028\000\000\000\000\000\000\
+ (22, 
+"\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\
 \\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\
-\\028\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\
+\\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\
+\\023\023\023\023\023\023\023\023\023\023\000\000\000\000\000\000\
+\\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\
+\\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\
+\\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\
+\\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\
+\\000"
+),
+ (24, 
+"\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\
+\\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\
+\\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\
+\\000\000\000\000\000\000\000\000\000\000\000\000\000\000\025\000\
+\\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\
+\\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\
+\\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\
+\\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\
+\\000"
+),
+ (30, 
+"\000\000\000\000\000\000\000\000\000\031\000\000\000\000\000\000\
+\\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\
+\\031\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\
 \\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\
 \\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\
 \\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\
@@ -196,32 +224,35 @@ in Vector.fromList(map g
 [{fin = [], trans = 0},
 {fin = [], trans = 1},
 {fin = [], trans = 1},
-{fin = [(N 43)], trans = 0},
-{fin = [(N 11),(N 43)], trans = 0},
-{fin = [(N 41),(N 43)], trans = 5},
-{fin = [(N 41)], trans = 5},
-{fin = [(N 41),(N 43)], trans = 7},
-{fin = [(N 41)], trans = 8},
-{fin = [(N 41)], trans = 9},
-{fin = [(N 32),(N 41)], trans = 5},
-{fin = [(N 41),(N 43)], trans = 11},
-{fin = [(N 41)], trans = 12},
-{fin = [(N 41)], trans = 13},
-{fin = [(N 41)], trans = 14},
-{fin = [(N 38),(N 41)], trans = 5},
-{fin = [(N 21),(N 43)], trans = 0},
-{fin = [(N 23),(N 43)], trans = 0},
-{fin = [(N 19),(N 43)], trans = 0},
-{fin = [(N 9),(N 43)], trans = 0},
-{fin = [(N 7),(N 43)], trans = 20},
-{fin = [(N 7)], trans = 20},
-{fin = [(N 15),(N 43)], trans = 0},
-{fin = [(N 13),(N 43)], trans = 0},
-{fin = [(N 17),(N 43)], trans = 0},
-{fin = [(N 27),(N 43)], trans = 0},
-{fin = [(N 25),(N 43)], trans = 0},
-{fin = [(N 4),(N 43)], trans = 27},
-{fin = [(N 4)], trans = 27},
+{fin = [(N 51)], trans = 0},
+{fin = [(N 19),(N 51)], trans = 0},
+{fin = [(N 49),(N 51)], trans = 5},
+{fin = [(N 49)], trans = 5},
+{fin = [(N 49),(N 51)], trans = 7},
+{fin = [(N 49)], trans = 8},
+{fin = [(N 49)], trans = 9},
+{fin = [(N 40),(N 49)], trans = 5},
+{fin = [(N 49),(N 51)], trans = 11},
+{fin = [(N 49)], trans = 12},
+{fin = [(N 49)], trans = 13},
+{fin = [(N 49)], trans = 14},
+{fin = [(N 46),(N 49)], trans = 5},
+{fin = [(N 29),(N 51)], trans = 0},
+{fin = [(N 31),(N 51)], trans = 17},
+{fin = [(N 14)], trans = 0},
+{fin = [(N 27),(N 51)], trans = 0},
+{fin = [(N 9),(N 51)], trans = 0},
+{fin = [(N 11),(N 51)], trans = 0},
+{fin = [(N 7),(N 51)], trans = 22},
+{fin = [(N 7)], trans = 22},
+{fin = [(N 23),(N 51)], trans = 24},
+{fin = [(N 17)], trans = 0},
+{fin = [(N 21),(N 51)], trans = 0},
+{fin = [(N 25),(N 51)], trans = 0},
+{fin = [(N 35),(N 51)], trans = 0},
+{fin = [(N 33),(N 51)], trans = 0},
+{fin = [(N 4),(N 51)], trans = 30},
+{fin = [(N 4)], trans = 30},
 {fin = [(N 1)], trans = 0}])
 end
 structure StartStates =
@@ -265,41 +296,47 @@ let fun continue() = lex() in
 
 			(* Application actions *)
 
-  1 => ((*#line 48.17 "lexer.lex"*)refinc linep; lex()(*#line 268.1 "lexer.lex.sml"*)
+  1 => ((*#line 54.17 "lexer.lex"*)refinc linep; lex()(*#line 299.1 "lexer.lex.sml"*)
 )
-| 11 => ((*#line 54.17 "lexer.lex"*)Tokens.NEGATE(!linep, yypos-1)(*#line 270.1 "lexer.lex.sml"*)
+| 11 => ((*#line 60.17 "lexer.lex"*)Tokens.COLON(!linep, yypos-1)(*#line 301.1 "lexer.lex.sml"*)
 )
-| 13 => ((*#line 55.17 "lexer.lex"*)Tokens.PLUS(!linep, yypos-1)(*#line 272.1 "lexer.lex.sml"*)
+| 14 => ((*#line 61.18 "lexer.lex"*)Tokens.DECLARROW(!linep, yypos-1)(*#line 303.1 "lexer.lex.sml"*)
 )
-| 15 => ((*#line 56.17 "lexer.lex"*)Tokens.MINUS(!linep, yypos-1)(*#line 274.1 "lexer.lex.sml"*)
+| 17 => ((*#line 62.18 "lexer.lex"*)Tokens.ARROW(!linep, yypos-1)(*#line 305.1 "lexer.lex.sml"*)
 )
-| 17 => ((*#line 57.17 "lexer.lex"*)Tokens.TIMES(!linep, yypos-1)(*#line 276.1 "lexer.lex.sml"*)
+| 19 => ((*#line 63.17 "lexer.lex"*)Tokens.NEGATE(!linep, yypos-1)(*#line 307.1 "lexer.lex.sml"*)
 )
-| 19 => ((*#line 58.17 "lexer.lex"*)Tokens.LESSTHAN(!linep, yypos-1)(*#line 278.1 "lexer.lex.sml"*)
+| 21 => ((*#line 64.17 "lexer.lex"*)Tokens.PLUS(!linep, yypos-1)(*#line 309.1 "lexer.lex.sml"*)
 )
-| 21 => ((*#line 59.17 "lexer.lex"*)Tokens.GREATERTHAN(!linep, yypos-1)(*#line 280.1 "lexer.lex.sml"*)
+| 23 => ((*#line 65.17 "lexer.lex"*)Tokens.MINUS(!linep, yypos-1)(*#line 311.1 "lexer.lex.sml"*)
 )
-| 23 => ((*#line 60.17 "lexer.lex"*)Tokens.EQUALS(!linep, yypos-1)(*#line 282.1 "lexer.lex.sml"*)
+| 25 => ((*#line 66.17 "lexer.lex"*)Tokens.TIMES(!linep, yypos-1)(*#line 313.1 "lexer.lex.sml"*)
 )
-| 25 => ((*#line 61.17 "lexer.lex"*)Tokens.LPAREN(!linep, yypos-1)(*#line 284.1 "lexer.lex.sml"*)
+| 27 => ((*#line 67.17 "lexer.lex"*)Tokens.LESSTHAN(!linep, yypos-1)(*#line 315.1 "lexer.lex.sml"*)
 )
-| 27 => ((*#line 62.17 "lexer.lex"*)Tokens.RPAREN(!linep, yypos-1)(*#line 286.1 "lexer.lex.sml"*)
+| 29 => ((*#line 68.17 "lexer.lex"*)Tokens.GREATERTHAN(!linep, yypos-1)(*#line 317.1 "lexer.lex.sml"*)
 )
-| 32 => ((*#line 63.17 "lexer.lex"*)Tokens.CONST(true ,!linep, yypos-1)(*#line 288.1 "lexer.lex.sml"*)
+| 31 => ((*#line 69.17 "lexer.lex"*)Tokens.EQUALS(!linep, yypos-1)(*#line 319.1 "lexer.lex.sml"*)
 )
-| 38 => ((*#line 64.17 "lexer.lex"*)Tokens.CONST(false ,!linep, yypos-1)(*#line 290.1 "lexer.lex.sml"*)
+| 33 => ((*#line 70.17 "lexer.lex"*)Tokens.LPAREN(!linep, yypos-1)(*#line 321.1 "lexer.lex.sml"*)
 )
-| 4 => ((*#line 49.17 "lexer.lex"*)lex()(*#line 292.1 "lexer.lex.sml"*)
+| 35 => ((*#line 71.17 "lexer.lex"*)Tokens.RPAREN(!linep, yypos-1)(*#line 323.1 "lexer.lex.sml"*)
 )
-| 41 => let val yytext=yymktext() in (*#line 65.17 "lexer.lex"*)findKeywords(yytext,!linep,yypos-1)(*#line 294.1 "lexer.lex.sml"*)
+| 4 => ((*#line 55.17 "lexer.lex"*)lex()(*#line 325.1 "lexer.lex.sml"*)
+)
+| 40 => ((*#line 72.17 "lexer.lex"*)Tokens.CONST(true ,!linep, yypos-1)(*#line 327.1 "lexer.lex.sml"*)
+)
+| 46 => ((*#line 73.17 "lexer.lex"*)Tokens.CONST(false ,!linep, yypos-1)(*#line 329.1 "lexer.lex.sml"*)
+)
+| 49 => let val yytext=yymktext() in (*#line 74.17 "lexer.lex"*)findKeywords(yytext,!linep,yypos-1)(*#line 331.1 "lexer.lex.sml"*)
  end
-| 43 => let val yytext=yymktext() in (*#line 66.17 "lexer.lex"*)error (yytext ,!linep ,yypos-1); lex()(*#line 296.1 "lexer.lex.sml"*)
+| 51 => let val yytext=yymktext() in (*#line 75.17 "lexer.lex"*)error (yytext ,!linep ,yypos-1); lex()(*#line 333.1 "lexer.lex.sml"*)
  end
-| 7 => let val yytext=yymktext() in (*#line 50.14 "lexer.lex"*)Tokens.NUM
+| 7 => let val yytext=yymktext() in (*#line 56.14 "lexer.lex"*)Tokens.NUM
 	     (List.foldl (fn (a,r) => ord(a) - ord(#"0") + 10*r) 0 (explode yytext),
-	      !linep, yypos-1)(*#line 300.1 "lexer.lex.sml"*)
+	      !linep, yypos-1)(*#line 337.1 "lexer.lex.sml"*)
  end
-| 9 => ((*#line 53.17 "lexer.lex"*)Tokens.TERM(!linep, yypos-1)(*#line 302.1 "lexer.lex.sml"*)
+| 9 => ((*#line 59.17 "lexer.lex"*)Tokens.TERM(!linep, yypos-1)(*#line 339.1 "lexer.lex.sml"*)
 )
 | _ => raise Internal.LexerError
 

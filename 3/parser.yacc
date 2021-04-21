@@ -30,6 +30,15 @@
 | IN 
 | END
 | VAL
+| FN
+| FUN
+| COLON
+| ARROW
+| DECLARROW
+| INT
+| BOOL
+| STRING
+| REAL
 | ID of string
 | CONST of bool
 | NUM of int
@@ -37,6 +46,8 @@
 %nonterm EXP of AST.exp 
 | Program of AST.exp
 | DECL of AST.decl
+| primitiveType of AST.primitiveType
+| compositeType of AST.compositeType
 
 %pos int
 
@@ -44,6 +55,7 @@
 %noshift EOF
 
 %right IF THEN ELSE FI
+%right ARROW DECLARROW
 %right LET IN END
 %right IMPLIES
 %left AND OR XOR EQUALS
@@ -57,6 +69,8 @@
 Program : EXP TERM          (EXP)
 
 DECL: VAL ID EQUALS EXP       (AST.ValDecl(ID, EXP))
+  | FUN ID LPAREN ID COLON compositeType RPAREN COLON compositeType DECLARROW EXP (AST.FunDecl(ID1, AST.Lambda(ID2, compositeType1, compositeType2, EXP)))
+
 
 EXP : CONST                   (AST.ConstExp(CONST))
   | ID                        (AST.VarExp(ID))
@@ -77,4 +91,13 @@ EXP : CONST                   (AST.ConstExp(CONST))
   | LET DECL IN EXP END       (AST.LetExp(DECL, EXP))
 |IF EXP THEN EXP ELSE EXP FI  (AST.ConditionalExp(EXP1, EXP2, EXP3))
   | LPAREN EXP RPAREN         (EXP)
+  | FN LPAREN ID COLON compositeType RPAREN COLON compositeType DECLARROW EXP  (AST.LambdaExp(AST.Lambda(ID, compositeType1, compositeType2, EXP)))
+  | LPAREN EXP EXP RPAREN      (AST.AppExp(EXP1, EXP2))
   
+compositeType : 
+compositeType ARROW compositeType   (AST.ARROW(compositeType1, compositeType2))
+              | primitiveType       (AST.TYPE(primitiveType))
+primitiveType : INT     (AST.INT)
+              | BOOL    (AST.BOOL)
+              | REAL    (AST.REAL)
+              | STRING  (AST.STRING)

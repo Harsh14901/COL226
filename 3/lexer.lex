@@ -29,7 +29,13 @@ structure Tokens= Tokens
    ("AND", Tokens.AND),
    ("OR", Tokens.OR),
    ("XOR", Tokens.XOR),
-   ("IMPLIES", Tokens.IMPLIES)
+   ("IMPLIES", Tokens.IMPLIES),
+   ("fn", Tokens.FN),
+   ("fun", Tokens.FUN),
+   ("int", Tokens.INT),
+   ("bool", Tokens.BOOL),
+   ("real", Tokens.REAL),
+   ("string", Tokens.STRING)
    
    ]
 
@@ -51,6 +57,9 @@ digit=[0-9];
 	     (List.foldl (fn (a,r) => ord(a) - ord(#"0") + 10*r) 0 (explode yytext),
 	      !linep, yypos-1));
 ";"         => (Tokens.TERM(!linep, yypos-1));
+":"         => (Tokens.COLON(!linep, yypos-1));
+"=>"         => (Tokens.DECLARROW(!linep, yypos-1));
+"->"         => (Tokens.ARROW(!linep, yypos-1));
 "~"         => (Tokens.NEGATE(!linep, yypos-1));
 "+"         => (Tokens.PLUS(!linep, yypos-1));
 "-"         => (Tokens.MINUS(!linep, yypos-1));
