@@ -47,7 +47,10 @@ fun evalExp(e:exp, env:environment):value =
             NULL => LambdaVal(Lambda(arg, argType, retType, substituteExp(body,env)))
             | _ => LambdaVal(Lambda(arg, argType, retType, body))
         )
-        
+    
+    | DeclExp(ValDecl(id, e)) => evalExp(e, env)
+    | DeclExp(FunDecl(id, f)) => LambdaVal(f) 
+
 and
 evalBinExp(b:binop, e1:exp, e2:exp, env:environment):value =
 case (b, evalExp(e1, env), evalExp(e2, env))  of
@@ -171,13 +174,39 @@ checkTypes(e: exp, typeEnv: typeEnvironment): compositeType =
             in
               if retType = t1 then ARROW(argType,retType) else raise brokenTypes
             end
-    
+    | DeclExp(ValDecl(id, e)) => checkTypes(e, typeEnv)
+    | DeclExp(FunDecl(fnName, Lambda(arg, argType, retType, body))) => 
+        let
+          val f = LambdaExp(Lambda(arg,argType, retType, body))
+          val fnType = ARROW(argType, retType)
+          val newTypeEnv = typeEnvAdd(fnName, fnType , typeEnv)
+          val _ = checkTypes(f, newTypeEnv)
+        in
+          fnType
+        end
 and 
-evalWithTypeCheck(e:exp): (value * compositeType) = 
+evalWithTypeCheck(e:exp, env:environment, tenv: typeEnvironment): (value * compositeType) = 
     let
-        val t = checkTypes(e, [])
-        val v = evalExp(e, [])
+        val t = checkTypes(e, tenv)
+        val v = evalExp(e, env)
     in
         (v , t)
     end
+and    
+evalProgram([], env, tenv) = []
+| evalProgram(e::el, env, tenv): (value * compositeType) list = 
+    let
+      val (v,t) = evalWithTypeCheck(e, env, tenv)
+    in
+        ( case e of 
+        DeclExp(d) => 
+            (case d of
+                ValDecl(id, _) => (v,t)::evalProgram(el, envAdd(id, v, env), typeEnvAdd(id, t, tenv))
+            |   FunDecl(id, _ ) => (v,t)::evalProgram(el, envAdd(id, v, env), typeEnvAdd(id, t, tenv))
+            )
+            
+        | _ => (v,t)::evalProgram(el, env, tenv)
+    )
+    end
+    
 end

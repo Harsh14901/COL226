@@ -44,7 +44,9 @@
 | NUM of int
 
 %nonterm EXP of AST.exp 
-| Program of AST.exp
+| Program of (AST.exp) list
+| StatementSet of (AST.exp) list
+| Statement of AST.exp
 | DECL of AST.decl
 | primitiveType of AST.primitiveType
 | compositeType of AST.compositeType
@@ -66,7 +68,10 @@
 %nonassoc NEGATE
 %nonassoc LPAREN RPAREN
 %% 
-Program : EXP TERM          (EXP)
+Program : Statement StatementSet          (Statement::StatementSet)
+StatementSet:                             ([])
+| Statement StatementSet                  (Statement::StatementSet)
+Statement : EXP TERM                      (EXP)
 
 DECL: VAL ID EQUALS EXP       (AST.ValDecl(ID, EXP))
   | FUN ID LPAREN ID COLON compositeType RPAREN COLON compositeType DECLARROW EXP (AST.FunDecl(ID1, AST.Lambda(ID2, compositeType1, compositeType2, EXP)))
@@ -93,6 +98,7 @@ EXP : CONST                   (AST.ConstExp(CONST))
   | LPAREN EXP RPAREN         (EXP)
   | FN LPAREN ID COLON compositeType RPAREN COLON compositeType DECLARROW EXP  (AST.LambdaExp(AST.Lambda(ID, compositeType1, compositeType2, EXP)))
   | LPAREN EXP EXP RPAREN      (AST.AppExp(EXP1, EXP2))
+  | DECL                       (AST.DeclExp(DECL))
   
 compositeType : 
 compositeType ARROW compositeType   (AST.ARROW(compositeType1, compositeType2))

@@ -20,148 +20,128 @@ local open LrTable in
 val table=let val actionRows =
 "\
 \\001\000\001\000\000\000\002\000\000\000\000\000\
-\\001\000\002\000\024\000\004\000\023\000\005\000\022\000\006\000\021\000\
-\\007\000\020\000\008\000\019\000\015\000\018\000\016\000\017\000\
-\\017\000\016\000\018\000\015\000\020\000\014\000\021\000\013\000\000\000\
-\\001\000\003\000\012\000\004\000\023\000\005\000\022\000\006\000\021\000\
-\\007\000\020\000\008\000\019\000\009\000\011\000\013\000\010\000\
-\\014\000\049\000\015\000\018\000\016\000\017\000\017\000\016\000\
-\\018\000\015\000\019\000\009\000\020\000\014\000\021\000\013\000\
-\\022\000\008\000\026\000\007\000\035\000\006\000\036\000\005\000\
-\\037\000\004\000\000\000\
-\\001\000\003\000\012\000\009\000\011\000\013\000\010\000\019\000\009\000\
-\\022\000\008\000\026\000\007\000\035\000\006\000\036\000\005\000\
-\\037\000\004\000\000\000\
-\\001\000\004\000\023\000\005\000\022\000\006\000\021\000\007\000\020\000\
-\\008\000\019\000\010\000\050\000\015\000\018\000\016\000\017\000\
-\\017\000\016\000\018\000\015\000\020\000\014\000\021\000\013\000\000\000\
-\\001\000\004\000\023\000\005\000\022\000\006\000\021\000\007\000\020\000\
-\\008\000\019\000\011\000\066\000\015\000\018\000\016\000\017\000\
-\\017\000\016\000\018\000\015\000\020\000\014\000\021\000\013\000\000\000\
-\\001\000\004\000\023\000\005\000\022\000\006\000\021\000\007\000\020\000\
-\\008\000\019\000\012\000\074\000\015\000\018\000\016\000\017\000\
-\\017\000\016\000\018\000\015\000\020\000\014\000\021\000\013\000\000\000\
-\\001\000\004\000\023\000\005\000\022\000\006\000\021\000\007\000\020\000\
-\\008\000\019\000\014\000\055\000\015\000\018\000\016\000\017\000\
-\\017\000\016\000\018\000\015\000\020\000\014\000\021\000\013\000\000\000\
-\\001\000\004\000\023\000\005\000\022\000\006\000\021\000\007\000\020\000\
-\\008\000\019\000\015\000\018\000\016\000\017\000\017\000\016\000\
-\\018\000\015\000\020\000\014\000\021\000\013\000\024\000\063\000\000\000\
-\\001\000\007\000\054\000\000\000\
-\\001\000\013\000\025\000\000\000\
-\\001\000\013\000\053\000\000\000\
-\\001\000\014\000\068\000\029\000\067\000\000\000\
-\\001\000\014\000\076\000\029\000\067\000\000\000\
-\\001\000\023\000\045\000\000\000\
-\\001\000\025\000\028\000\027\000\027\000\000\000\
-\\001\000\028\000\051\000\000\000\
-\\001\000\028\000\069\000\000\000\
-\\001\000\028\000\072\000\000\000\
-\\001\000\028\000\078\000\000\000\
-\\001\000\029\000\067\000\030\000\077\000\000\000\
-\\001\000\029\000\067\000\030\000\081\000\000\000\
-\\001\000\031\000\062\000\032\000\061\000\033\000\060\000\034\000\059\000\000\000\
-\\001\000\035\000\044\000\000\000\
-\\001\000\035\000\046\000\000\000\
-\\001\000\035\000\047\000\000\000\
-\\001\000\035\000\064\000\000\000\
-\\084\000\000\000\
-\\085\000\004\000\023\000\005\000\022\000\006\000\021\000\007\000\020\000\
-\\008\000\019\000\015\000\018\000\016\000\017\000\017\000\016\000\
-\\018\000\015\000\020\000\014\000\021\000\013\000\000\000\
-\\086\000\004\000\023\000\005\000\022\000\006\000\021\000\007\000\020\000\
-\\008\000\019\000\015\000\018\000\016\000\017\000\017\000\016\000\
-\\018\000\015\000\020\000\014\000\021\000\013\000\000\000\
-\\087\000\000\000\
-\\088\000\000\000\
+\\001\000\002\000\030\000\004\000\029\000\005\000\028\000\006\000\027\000\
+\\007\000\026\000\008\000\025\000\015\000\024\000\016\000\023\000\
+\\017\000\022\000\018\000\021\000\020\000\020\000\021\000\019\000\000\000\
+\\001\000\003\000\016\000\004\000\029\000\005\000\028\000\006\000\027\000\
+\\007\000\026\000\008\000\025\000\009\000\015\000\013\000\014\000\
+\\014\000\056\000\015\000\024\000\016\000\023\000\017\000\022\000\
+\\018\000\021\000\019\000\013\000\020\000\020\000\021\000\019\000\
+\\022\000\012\000\025\000\011\000\026\000\010\000\027\000\009\000\
+\\035\000\008\000\036\000\007\000\037\000\006\000\000\000\
+\\001\000\003\000\016\000\009\000\015\000\013\000\014\000\019\000\013\000\
+\\022\000\012\000\025\000\011\000\026\000\010\000\027\000\009\000\
+\\035\000\008\000\036\000\007\000\037\000\006\000\000\000\
+\\001\000\004\000\029\000\005\000\028\000\006\000\027\000\007\000\026\000\
+\\008\000\025\000\010\000\057\000\015\000\024\000\016\000\023\000\
+\\017\000\022\000\018\000\021\000\020\000\020\000\021\000\019\000\000\000\
+\\001\000\004\000\029\000\005\000\028\000\006\000\027\000\007\000\026\000\
+\\008\000\025\000\011\000\072\000\015\000\024\000\016\000\023\000\
+\\017\000\022\000\018\000\021\000\020\000\020\000\021\000\019\000\000\000\
+\\001\000\004\000\029\000\005\000\028\000\006\000\027\000\007\000\026\000\
+\\008\000\025\000\012\000\080\000\015\000\024\000\016\000\023\000\
+\\017\000\022\000\018\000\021\000\020\000\020\000\021\000\019\000\000\000\
+\\001\000\004\000\029\000\005\000\028\000\006\000\027\000\007\000\026\000\
+\\008\000\025\000\014\000\062\000\015\000\024\000\016\000\023\000\
+\\017\000\022\000\018\000\021\000\020\000\020\000\021\000\019\000\000\000\
+\\001\000\004\000\029\000\005\000\028\000\006\000\027\000\007\000\026\000\
+\\008\000\025\000\015\000\024\000\016\000\023\000\017\000\022\000\
+\\018\000\021\000\020\000\020\000\021\000\019\000\024\000\071\000\000\000\
+\\001\000\007\000\053\000\000\000\
+\\001\000\013\000\032\000\000\000\
+\\001\000\013\000\051\000\000\000\
+\\001\000\014\000\075\000\029\000\074\000\000\000\
+\\001\000\014\000\077\000\029\000\074\000\000\000\
+\\001\000\023\000\054\000\000\000\
+\\001\000\025\000\011\000\027\000\009\000\000\000\
+\\001\000\028\000\059\000\000\000\
+\\001\000\028\000\064\000\000\000\
+\\001\000\028\000\079\000\000\000\
+\\001\000\028\000\081\000\000\000\
+\\001\000\029\000\074\000\030\000\084\000\000\000\
+\\001\000\029\000\074\000\030\000\085\000\000\000\
+\\001\000\031\000\070\000\032\000\069\000\033\000\068\000\034\000\067\000\000\000\
+\\001\000\035\000\031\000\000\000\
+\\001\000\035\000\033\000\000\000\
+\\001\000\035\000\052\000\000\000\
+\\001\000\035\000\058\000\000\000\
 \\089\000\000\000\
-\\090\000\015\000\018\000\016\000\017\000\017\000\016\000\018\000\015\000\
-\\020\000\014\000\021\000\013\000\000\000\
+\\090\000\003\000\016\000\009\000\015\000\013\000\014\000\019\000\013\000\
+\\022\000\012\000\025\000\011\000\026\000\010\000\027\000\009\000\
+\\035\000\008\000\036\000\007\000\037\000\006\000\000\000\
 \\091\000\000\000\
-\\092\000\015\000\018\000\016\000\017\000\017\000\016\000\018\000\015\000\
-\\020\000\014\000\021\000\013\000\000\000\
-\\093\000\015\000\018\000\016\000\017\000\017\000\016\000\018\000\015\000\
-\\020\000\014\000\021\000\013\000\000\000\
-\\094\000\015\000\018\000\016\000\017\000\017\000\016\000\018\000\015\000\
-\\020\000\014\000\021\000\013\000\000\000\
-\\095\000\015\000\018\000\016\000\017\000\017\000\016\000\018\000\015\000\
-\\020\000\014\000\021\000\013\000\000\000\
-\\096\000\004\000\023\000\005\000\022\000\006\000\021\000\007\000\020\000\
-\\008\000\019\000\015\000\018\000\016\000\017\000\017\000\016\000\
-\\018\000\015\000\020\000\014\000\021\000\013\000\000\000\
-\\097\000\017\000\016\000\018\000\015\000\000\000\
-\\098\000\017\000\016\000\018\000\015\000\000\000\
+\\092\000\000\000\
+\\093\000\015\000\024\000\016\000\023\000\017\000\022\000\018\000\021\000\
+\\020\000\020\000\021\000\019\000\000\000\
+\\094\000\004\000\029\000\005\000\028\000\006\000\027\000\007\000\026\000\
+\\008\000\025\000\015\000\024\000\016\000\023\000\017\000\022\000\
+\\018\000\021\000\020\000\020\000\021\000\019\000\000\000\
+\\095\000\000\000\
+\\096\000\000\000\
+\\097\000\000\000\
+\\098\000\015\000\024\000\016\000\023\000\017\000\022\000\018\000\021\000\
+\\020\000\020\000\021\000\019\000\000\000\
 \\099\000\000\000\
-\\100\000\000\000\
-\\101\000\015\000\018\000\016\000\017\000\017\000\016\000\018\000\015\000\000\000\
-\\102\000\015\000\018\000\016\000\017\000\017\000\016\000\018\000\015\000\000\000\
-\\103\000\000\000\
-\\104\000\000\000\
-\\105\000\000\000\
-\\106\000\004\000\023\000\005\000\022\000\006\000\021\000\007\000\020\000\
-\\008\000\019\000\015\000\018\000\016\000\017\000\017\000\016\000\
-\\018\000\015\000\020\000\014\000\021\000\013\000\000\000\
+\\100\000\015\000\024\000\016\000\023\000\017\000\022\000\018\000\021\000\
+\\020\000\020\000\021\000\019\000\000\000\
+\\101\000\015\000\024\000\016\000\023\000\017\000\022\000\018\000\021\000\
+\\020\000\020\000\021\000\019\000\000\000\
+\\102\000\015\000\024\000\016\000\023\000\017\000\022\000\018\000\021\000\
+\\020\000\020\000\021\000\019\000\000\000\
+\\103\000\015\000\024\000\016\000\023\000\017\000\022\000\018\000\021\000\
+\\020\000\020\000\021\000\019\000\000\000\
+\\104\000\004\000\029\000\005\000\028\000\006\000\027\000\007\000\026\000\
+\\008\000\025\000\015\000\024\000\016\000\023\000\017\000\022\000\
+\\018\000\021\000\020\000\020\000\021\000\019\000\000\000\
+\\105\000\017\000\022\000\018\000\021\000\000\000\
+\\106\000\017\000\022\000\018\000\021\000\000\000\
 \\107\000\000\000\
-\\108\000\029\000\067\000\000\000\
-\\109\000\000\000\
-\\110\000\000\000\
+\\108\000\000\000\
+\\109\000\015\000\024\000\016\000\023\000\017\000\022\000\018\000\021\000\000\000\
+\\110\000\015\000\024\000\016\000\023\000\017\000\022\000\018\000\021\000\000\000\
 \\111\000\000\000\
 \\112\000\000\000\
 \\113\000\000\000\
+\\114\000\004\000\029\000\005\000\028\000\006\000\027\000\007\000\026\000\
+\\008\000\025\000\015\000\024\000\016\000\023\000\017\000\022\000\
+\\018\000\021\000\020\000\020\000\021\000\019\000\000\000\
+\\115\000\000\000\
+\\116\000\000\000\
+\\117\000\029\000\074\000\000\000\
+\\118\000\000\000\
+\\119\000\000\000\
+\\120\000\000\000\
+\\121\000\000\000\
+\\122\000\000\000\
 \"
 val actionRowNumbers =
-"\003\000\001\000\032\000\030\000\
-\\031\000\010\000\015\000\003\000\
+"\003\000\054\000\028\000\001\000\
+\\035\000\033\000\034\000\023\000\
+\\010\000\024\000\015\000\003\000\
+\\003\000\003\000\003\000\028\000\
+\\027\000\003\000\003\000\003\000\
 \\003\000\003\000\003\000\003\000\
 \\003\000\003\000\003\000\003\000\
-\\003\000\003\000\003\000\003\000\
-\\003\000\003\000\027\000\023\000\
-\\014\000\024\000\025\000\034\000\
-\\002\000\004\000\033\000\044\000\
-\\045\000\042\000\043\000\041\000\
-\\040\000\039\000\038\000\037\000\
-\\036\000\035\000\016\000\003\000\
-\\011\000\009\000\007\000\048\000\
-\\003\000\022\000\008\000\026\000\
-\\003\000\050\000\005\000\012\000\
-\\052\000\055\000\056\000\054\000\
-\\053\000\046\000\017\000\028\000\
-\\003\000\022\000\018\000\022\000\
-\\006\000\051\000\022\000\013\000\
-\\047\000\020\000\019\000\003\000\
-\\022\000\049\000\021\000\003\000\
-\\029\000\000\000"
+\\030\000\011\000\025\000\009\000\
+\\014\000\037\000\002\000\004\000\
+\\036\000\029\000\047\000\048\000\
+\\045\000\046\000\044\000\043\000\
+\\042\000\041\000\040\000\039\000\
+\\038\000\026\000\016\000\003\000\
+\\003\000\007\000\051\000\003\000\
+\\017\000\022\000\031\000\008\000\
+\\053\000\005\000\022\000\012\000\
+\\056\000\059\000\060\000\058\000\
+\\057\000\049\000\003\000\013\000\
+\\022\000\018\000\006\000\019\000\
+\\055\000\022\000\050\000\022\000\
+\\020\000\021\000\003\000\003\000\
+\\052\000\032\000\000\000"
 val gotoT =
 "\
-\\001\000\001\000\002\000\081\000\000\000\
+\\001\000\003\000\002\000\086\000\004\000\002\000\005\000\001\000\000\000\
 \\000\000\
-\\000\000\
-\\000\000\
-\\000\000\
-\\000\000\
-\\003\000\024\000\000\000\
-\\001\000\027\000\000\000\
-\\001\000\028\000\000\000\
-\\001\000\029\000\000\000\
-\\001\000\030\000\000\000\
-\\001\000\031\000\000\000\
-\\001\000\032\000\000\000\
-\\001\000\033\000\000\000\
-\\001\000\034\000\000\000\
-\\001\000\035\000\000\000\
-\\001\000\036\000\000\000\
-\\001\000\037\000\000\000\
-\\001\000\038\000\000\000\
-\\001\000\039\000\000\000\
-\\001\000\040\000\000\000\
-\\001\000\041\000\000\000\
-\\000\000\
-\\000\000\
-\\000\000\
-\\000\000\
-\\000\000\
-\\000\000\
-\\001\000\046\000\000\000\
+\\001\000\003\000\003\000\016\000\004\000\015\000\005\000\001\000\000\000\
 \\000\000\
 \\000\000\
 \\000\000\
@@ -169,23 +149,31 @@ val gotoT =
 \\000\000\
 \\000\000\
 \\000\000\
+\\005\000\032\000\000\000\
+\\001\000\033\000\005\000\001\000\000\000\
+\\001\000\034\000\005\000\001\000\000\000\
+\\001\000\035\000\005\000\001\000\000\000\
+\\001\000\036\000\005\000\001\000\000\000\
+\\001\000\003\000\003\000\037\000\004\000\015\000\005\000\001\000\000\000\
+\\000\000\
+\\001\000\038\000\005\000\001\000\000\000\
+\\001\000\039\000\005\000\001\000\000\000\
+\\001\000\040\000\005\000\001\000\000\000\
+\\001\000\041\000\005\000\001\000\000\000\
+\\001\000\042\000\005\000\001\000\000\000\
+\\001\000\043\000\005\000\001\000\000\000\
+\\001\000\044\000\005\000\001\000\000\000\
+\\001\000\045\000\005\000\001\000\000\000\
+\\001\000\046\000\005\000\001\000\000\000\
+\\001\000\047\000\005\000\001\000\000\000\
+\\001\000\048\000\005\000\001\000\000\000\
 \\000\000\
 \\000\000\
 \\000\000\
 \\000\000\
 \\000\000\
 \\000\000\
-\\000\000\
-\\001\000\050\000\000\000\
-\\000\000\
-\\000\000\
-\\000\000\
-\\000\000\
-\\001\000\054\000\000\000\
-\\004\000\056\000\005\000\055\000\000\000\
-\\000\000\
-\\000\000\
-\\001\000\063\000\000\000\
+\\001\000\053\000\005\000\001\000\000\000\
 \\000\000\
 \\000\000\
 \\000\000\
@@ -197,27 +185,50 @@ val gotoT =
 \\000\000\
 \\000\000\
 \\000\000\
-\\001\000\068\000\000\000\
-\\004\000\056\000\005\000\069\000\000\000\
-\\000\000\
-\\004\000\056\000\005\000\071\000\000\000\
-\\000\000\
-\\000\000\
-\\004\000\056\000\005\000\073\000\000\000\
 \\000\000\
 \\000\000\
 \\000\000\
 \\000\000\
-\\001\000\077\000\000\000\
-\\004\000\056\000\005\000\078\000\000\000\
+\\000\000\
+\\001\000\058\000\005\000\001\000\000\000\
+\\001\000\059\000\005\000\001\000\000\000\
 \\000\000\
 \\000\000\
-\\001\000\080\000\000\000\
+\\001\000\061\000\005\000\001\000\000\000\
+\\000\000\
+\\006\000\064\000\007\000\063\000\000\000\
+\\000\000\
+\\000\000\
+\\000\000\
+\\000\000\
+\\006\000\064\000\007\000\071\000\000\000\
+\\000\000\
+\\000\000\
+\\000\000\
+\\000\000\
+\\000\000\
+\\000\000\
+\\000\000\
+\\001\000\074\000\005\000\001\000\000\000\
+\\000\000\
+\\006\000\064\000\007\000\076\000\000\000\
+\\000\000\
+\\000\000\
+\\000\000\
+\\000\000\
+\\006\000\064\000\007\000\080\000\000\000\
+\\000\000\
+\\006\000\064\000\007\000\081\000\000\000\
+\\000\000\
+\\000\000\
+\\001\000\084\000\005\000\001\000\000\000\
+\\001\000\085\000\005\000\001\000\000\000\
+\\000\000\
 \\000\000\
 \\000\000\
 \"
-val numstates = 82
-val numrules = 30
+val numstates = 87
+val numrules = 34
 val s = ref "" and index = ref 0
 val string_to_int = fn () => 
 let val i = !index
@@ -279,10 +290,10 @@ type pos = int
 type arg = unit
 structure MlyValue = 
 struct
-datatype svalue = VOID | ntVOID of unit ->  unit | NUM of unit ->  (int) | CONST of unit ->  (bool) | ID of unit ->  (string) | compositeType of unit ->  (AST.compositeType) | primitiveType of unit ->  (AST.primitiveType) | DECL of unit ->  (AST.decl) | Program of unit ->  (AST.exp) | EXP of unit ->  (AST.exp)
+datatype svalue = VOID | ntVOID of unit ->  unit | NUM of unit ->  (int) | CONST of unit ->  (bool) | ID of unit ->  (string) | compositeType of unit ->  (AST.compositeType) | primitiveType of unit ->  (AST.primitiveType) | DECL of unit ->  (AST.decl) | Statement of unit ->  (AST.exp) | StatementSet of unit ->  ( ( AST.exp )  list) | Program of unit ->  ( ( AST.exp )  list) | EXP of unit ->  (AST.exp)
 end
 type svalue = MlyValue.svalue
-type result = AST.exp
+type result =  ( AST.exp )  list
 end
 structure EC=
 struct
@@ -348,201 +359,225 @@ val actions =
 fn (i392,defaultPos,stack,
     (()):arg) =>
 case (i392,stack)
-of  ( 0, ( ( _, ( _, _, TERM1right)) :: ( _, ( MlyValue.EXP EXP1, EXP1left, _)) :: rest671)) => let val  result = MlyValue.Program (fn _ => let val  (EXP as EXP1) = EXP1 ()
- in ((*#line 69.30 "parser.yacc"*)EXP(*#line 351.1 "parser.yacc.sml"*)
+of  ( 0, ( ( _, ( MlyValue.StatementSet StatementSet1, _, StatementSet1right)) :: ( _, ( MlyValue.Statement Statement1, Statement1left, _)) :: rest671)) => let val  result = MlyValue.Program (fn _ => let val  (Statement as Statement1) = Statement1 ()
+ val  (StatementSet as StatementSet1) = StatementSet1 ()
+ in ((*#line 71.44 "parser.yacc"*)Statement::StatementSet(*#line 362.1 "parser.yacc.sml"*)
 )
 end)
- in ( LrTable.NT 1, ( result, EXP1left, TERM1right), rest671)
+ in ( LrTable.NT 1, ( result, Statement1left, StatementSet1right), rest671)
 end
-|  ( 1, ( ( _, ( MlyValue.EXP EXP1, _, EXP1right)) :: _ :: ( _, ( MlyValue.ID ID1, _, _)) :: ( _, ( _, VAL1left, _)) :: rest671)) => let val  result = MlyValue.DECL (fn _ => let val  (ID as ID1) = ID1 ()
+|  ( 1, ( rest671)) => let val  result = MlyValue.StatementSet (fn _ => ((*#line 72.44 "parser.yacc"*)[](*#line 369.1 "parser.yacc.sml"*)
+))
+ in ( LrTable.NT 2, ( result, defaultPos, defaultPos), rest671)
+end
+|  ( 2, ( ( _, ( MlyValue.StatementSet StatementSet1, _, StatementSet1right)) :: ( _, ( MlyValue.Statement Statement1, Statement1left, _)) :: rest671)) => let val  result = MlyValue.StatementSet (fn _ => let val  (Statement as Statement1) = Statement1 ()
+ val  (StatementSet as StatementSet1) = StatementSet1 ()
+ in ((*#line 73.44 "parser.yacc"*)Statement::StatementSet(*#line 373.1 "parser.yacc.sml"*)
+)
+end)
+ in ( LrTable.NT 2, ( result, Statement1left, StatementSet1right), rest671)
+end
+|  ( 3, ( ( _, ( _, _, TERM1right)) :: ( _, ( MlyValue.EXP EXP1, EXP1left, _)) :: rest671)) => let val  result = MlyValue.Statement (fn _ => let val  (EXP as EXP1) = EXP1 ()
+ in ((*#line 74.44 "parser.yacc"*)EXP(*#line 380.1 "parser.yacc.sml"*)
+)
+end)
+ in ( LrTable.NT 3, ( result, EXP1left, TERM1right), rest671)
+end
+|  ( 4, ( ( _, ( MlyValue.EXP EXP1, _, EXP1right)) :: _ :: ( _, ( MlyValue.ID ID1, _, _)) :: ( _, ( _, VAL1left, _)) :: rest671)) => let val  result = MlyValue.DECL (fn _ => let val  (ID as ID1) = ID1 ()
  val  (EXP as EXP1) = EXP1 ()
- in ((*#line 71.32 "parser.yacc"*)AST.ValDecl(ID, EXP)(*#line 357.1 "parser.yacc.sml"*)
+ in ((*#line 76.32 "parser.yacc"*)AST.ValDecl(ID, EXP)(*#line 386.1 "parser.yacc.sml"*)
 )
 end)
- in ( LrTable.NT 2, ( result, VAL1left, EXP1right), rest671)
+ in ( LrTable.NT 4, ( result, VAL1left, EXP1right), rest671)
 end
-|  ( 2, ( ( _, ( MlyValue.EXP EXP1, _, EXP1right)) :: _ :: ( _, ( MlyValue.compositeType compositeType2, _, _)) :: _ :: _ :: ( _, ( MlyValue.compositeType compositeType1, _, _)) :: _ :: ( _, ( MlyValue.ID ID2, _, _)) :: _ :: ( _, ( MlyValue.ID ID1, _, _)) :: ( _, ( _, FUN1left, _)) :: rest671)) => let val  result = MlyValue.DECL (fn _ => let val  ID1 = ID1 ()
+|  ( 5, ( ( _, ( MlyValue.EXP EXP1, _, EXP1right)) :: _ :: ( _, ( MlyValue.compositeType compositeType2, _, _)) :: _ :: _ :: ( _, ( MlyValue.compositeType compositeType1, _, _)) :: _ :: ( _, ( MlyValue.ID ID2, _, _)) :: _ :: ( _, ( MlyValue.ID ID1, _, _)) :: ( _, ( _, FUN1left, _)) :: rest671)) => let val  result = MlyValue.DECL (fn _ => let val  ID1 = ID1 ()
  val  ID2 = ID2 ()
  val  compositeType1 = compositeType1 ()
  val  compositeType2 = compositeType2 ()
  val  (EXP as EXP1) = EXP1 ()
- in ((*#line 72.84 "parser.yacc"*)AST.FunDecl(ID1, AST.Lambda(ID2, compositeType1, compositeType2, EXP))(*#line 364.1 "parser.yacc.sml"*)
+ in ((*#line 77.84 "parser.yacc"*)AST.FunDecl(ID1, AST.Lambda(ID2, compositeType1, compositeType2, EXP))(*#line 393.1 "parser.yacc.sml"*)
 )
 end)
- in ( LrTable.NT 2, ( result, FUN1left, EXP1right), rest671)
+ in ( LrTable.NT 4, ( result, FUN1left, EXP1right), rest671)
 end
-|  ( 3, ( ( _, ( MlyValue.CONST CONST1, CONST1left, CONST1right)) :: rest671)) => let val  result = MlyValue.EXP (fn _ => let val  (CONST as CONST1) = CONST1 ()
- in ((*#line 75.32 "parser.yacc"*)AST.ConstExp(CONST)(*#line 374.1 "parser.yacc.sml"*)
+|  ( 6, ( ( _, ( MlyValue.CONST CONST1, CONST1left, CONST1right)) :: rest671)) => let val  result = MlyValue.EXP (fn _ => let val  (CONST as CONST1) = CONST1 ()
+ in ((*#line 80.32 "parser.yacc"*)AST.ConstExp(CONST)(*#line 403.1 "parser.yacc.sml"*)
 )
 end)
  in ( LrTable.NT 0, ( result, CONST1left, CONST1right), rest671)
 end
-|  ( 4, ( ( _, ( MlyValue.ID ID1, ID1left, ID1right)) :: rest671)) => let val  result = MlyValue.EXP (fn _ => let val  (ID as ID1) = ID1 ()
- in ((*#line 76.32 "parser.yacc"*)AST.VarExp(ID)(*#line 380.1 "parser.yacc.sml"*)
+|  ( 7, ( ( _, ( MlyValue.ID ID1, ID1left, ID1right)) :: rest671)) => let val  result = MlyValue.EXP (fn _ => let val  (ID as ID1) = ID1 ()
+ in ((*#line 81.32 "parser.yacc"*)AST.VarExp(ID)(*#line 409.1 "parser.yacc.sml"*)
 )
 end)
  in ( LrTable.NT 0, ( result, ID1left, ID1right), rest671)
 end
-|  ( 5, ( ( _, ( MlyValue.NUM NUM1, NUM1left, NUM1right)) :: rest671)) => let val  result = MlyValue.EXP (fn _ => let val  (NUM as NUM1) = NUM1 ()
- in ((*#line 77.32 "parser.yacc"*)AST.NumExp(NUM)(*#line 386.1 "parser.yacc.sml"*)
+|  ( 8, ( ( _, ( MlyValue.NUM NUM1, NUM1left, NUM1right)) :: rest671)) => let val  result = MlyValue.EXP (fn _ => let val  (NUM as NUM1) = NUM1 ()
+ in ((*#line 82.32 "parser.yacc"*)AST.NumExp(NUM)(*#line 415.1 "parser.yacc.sml"*)
 )
 end)
  in ( LrTable.NT 0, ( result, NUM1left, NUM1right), rest671)
 end
-|  ( 6, ( ( _, ( MlyValue.EXP EXP1, _, EXP1right)) :: ( _, ( _, NOT1left, _)) :: rest671)) => let val  result = MlyValue.EXP (fn _ => let val  (EXP as EXP1) = EXP1 ()
- in ((*#line 78.32 "parser.yacc"*)AST.NegateExp(EXP)(*#line 392.1 "parser.yacc.sml"*)
+|  ( 9, ( ( _, ( MlyValue.EXP EXP1, _, EXP1right)) :: ( _, ( _, NOT1left, _)) :: rest671)) => let val  result = MlyValue.EXP (fn _ => let val  (EXP as EXP1) = EXP1 ()
+ in ((*#line 83.32 "parser.yacc"*)AST.NegateExp(EXP)(*#line 421.1 "parser.yacc.sml"*)
 )
 end)
  in ( LrTable.NT 0, ( result, NOT1left, EXP1right), rest671)
 end
-|  ( 7, ( ( _, ( MlyValue.EXP EXP1, _, EXP1right)) :: ( _, ( _, NEGATE1left, _)) :: rest671)) => let val  result = MlyValue.EXP (fn _ => let val  (EXP as EXP1) = EXP1 ()
- in ((*#line 79.32 "parser.yacc"*)AST.NegateExp(EXP)(*#line 398.1 "parser.yacc.sml"*)
+|  ( 10, ( ( _, ( MlyValue.EXP EXP1, _, EXP1right)) :: ( _, ( _, NEGATE1left, _)) :: rest671)) => let val  result = MlyValue.EXP (fn _ => let val  (EXP as EXP1) = EXP1 ()
+ in ((*#line 84.32 "parser.yacc"*)AST.NegateExp(EXP)(*#line 427.1 "parser.yacc.sml"*)
 )
 end)
  in ( LrTable.NT 0, ( result, NEGATE1left, EXP1right), rest671)
 end
-|  ( 8, ( ( _, ( MlyValue.EXP EXP2, _, EXP2right)) :: _ :: ( _, ( MlyValue.EXP EXP1, EXP1left, _)) :: rest671)) => let val  result = MlyValue.EXP (fn _ => let val  EXP1 = EXP1 ()
- val  EXP2 = EXP2 ()
- in ((*#line 80.32 "parser.yacc"*)AST.BoolExp(AST.And, EXP1, EXP2)(*#line 404.1 "parser.yacc.sml"*)
-)
-end)
- in ( LrTable.NT 0, ( result, EXP1left, EXP2right), rest671)
-end
-|  ( 9, ( ( _, ( MlyValue.EXP EXP2, _, EXP2right)) :: _ :: ( _, ( MlyValue.EXP EXP1, EXP1left, _)) :: rest671)) => let val  result = MlyValue.EXP (fn _ => let val  EXP1 = EXP1 ()
- val  EXP2 = EXP2 ()
- in ((*#line 81.32 "parser.yacc"*)AST.BoolExp(AST.Or, EXP1, EXP2)(*#line 411.1 "parser.yacc.sml"*)
-)
-end)
- in ( LrTable.NT 0, ( result, EXP1left, EXP2right), rest671)
-end
-|  ( 10, ( ( _, ( MlyValue.EXP EXP2, _, EXP2right)) :: _ :: ( _, ( MlyValue.EXP EXP1, EXP1left, _)) :: rest671)) => let val  result = MlyValue.EXP (fn _ => let val  EXP1 = EXP1 ()
- val  EXP2 = EXP2 ()
- in ((*#line 82.32 "parser.yacc"*)AST.BoolExp(AST.Xor, EXP1, EXP2)(*#line 418.1 "parser.yacc.sml"*)
-)
-end)
- in ( LrTable.NT 0, ( result, EXP1left, EXP2right), rest671)
-end
 |  ( 11, ( ( _, ( MlyValue.EXP EXP2, _, EXP2right)) :: _ :: ( _, ( MlyValue.EXP EXP1, EXP1left, _)) :: rest671)) => let val  result = MlyValue.EXP (fn _ => let val  EXP1 = EXP1 ()
  val  EXP2 = EXP2 ()
- in ((*#line 83.32 "parser.yacc"*)AST.BoolExp(AST.Eq, EXP1, EXP2)(*#line 425.1 "parser.yacc.sml"*)
+ in ((*#line 85.32 "parser.yacc"*)AST.BoolExp(AST.And, EXP1, EXP2)(*#line 433.1 "parser.yacc.sml"*)
 )
 end)
  in ( LrTable.NT 0, ( result, EXP1left, EXP2right), rest671)
 end
 |  ( 12, ( ( _, ( MlyValue.EXP EXP2, _, EXP2right)) :: _ :: ( _, ( MlyValue.EXP EXP1, EXP1left, _)) :: rest671)) => let val  result = MlyValue.EXP (fn _ => let val  EXP1 = EXP1 ()
  val  EXP2 = EXP2 ()
- in ((*#line 84.32 "parser.yacc"*)AST.BoolExp(AST.Implies, EXP1, EXP2)(*#line 432.1 "parser.yacc.sml"*)
+ in ((*#line 86.32 "parser.yacc"*)AST.BoolExp(AST.Or, EXP1, EXP2)(*#line 440.1 "parser.yacc.sml"*)
 )
 end)
  in ( LrTable.NT 0, ( result, EXP1left, EXP2right), rest671)
 end
 |  ( 13, ( ( _, ( MlyValue.EXP EXP2, _, EXP2right)) :: _ :: ( _, ( MlyValue.EXP EXP1, EXP1left, _)) :: rest671)) => let val  result = MlyValue.EXP (fn _ => let val  EXP1 = EXP1 ()
  val  EXP2 = EXP2 ()
- in ((*#line 85.32 "parser.yacc"*)AST.BinExp(AST.Add, EXP1,  EXP2)(*#line 439.1 "parser.yacc.sml"*)
+ in ((*#line 87.32 "parser.yacc"*)AST.BoolExp(AST.Xor, EXP1, EXP2)(*#line 447.1 "parser.yacc.sml"*)
 )
 end)
  in ( LrTable.NT 0, ( result, EXP1left, EXP2right), rest671)
 end
 |  ( 14, ( ( _, ( MlyValue.EXP EXP2, _, EXP2right)) :: _ :: ( _, ( MlyValue.EXP EXP1, EXP1left, _)) :: rest671)) => let val  result = MlyValue.EXP (fn _ => let val  EXP1 = EXP1 ()
  val  EXP2 = EXP2 ()
- in ((*#line 86.32 "parser.yacc"*)AST.BinExp(AST.Sub,  EXP1,  EXP2)(*#line 446.1 "parser.yacc.sml"*)
+ in ((*#line 88.32 "parser.yacc"*)AST.BoolExp(AST.Eq, EXP1, EXP2)(*#line 454.1 "parser.yacc.sml"*)
 )
 end)
  in ( LrTable.NT 0, ( result, EXP1left, EXP2right), rest671)
 end
 |  ( 15, ( ( _, ( MlyValue.EXP EXP2, _, EXP2right)) :: _ :: ( _, ( MlyValue.EXP EXP1, EXP1left, _)) :: rest671)) => let val  result = MlyValue.EXP (fn _ => let val  EXP1 = EXP1 ()
  val  EXP2 = EXP2 ()
- in ((*#line 87.32 "parser.yacc"*)AST.BinExp(AST.Mul,  EXP1, EXP2)(*#line 453.1 "parser.yacc.sml"*)
+ in ((*#line 89.32 "parser.yacc"*)AST.BoolExp(AST.Implies, EXP1, EXP2)(*#line 461.1 "parser.yacc.sml"*)
 )
 end)
  in ( LrTable.NT 0, ( result, EXP1left, EXP2right), rest671)
 end
 |  ( 16, ( ( _, ( MlyValue.EXP EXP2, _, EXP2right)) :: _ :: ( _, ( MlyValue.EXP EXP1, EXP1left, _)) :: rest671)) => let val  result = MlyValue.EXP (fn _ => let val  EXP1 = EXP1 ()
  val  EXP2 = EXP2 ()
- in ((*#line 88.32 "parser.yacc"*)AST.BinExp(AST.Div, EXP1, EXP2)(*#line 460.1 "parser.yacc.sml"*)
+ in ((*#line 90.32 "parser.yacc"*)AST.BinExp(AST.Add, EXP1,  EXP2)(*#line 468.1 "parser.yacc.sml"*)
 )
 end)
  in ( LrTable.NT 0, ( result, EXP1left, EXP2right), rest671)
 end
 |  ( 17, ( ( _, ( MlyValue.EXP EXP2, _, EXP2right)) :: _ :: ( _, ( MlyValue.EXP EXP1, EXP1left, _)) :: rest671)) => let val  result = MlyValue.EXP (fn _ => let val  EXP1 = EXP1 ()
  val  EXP2 = EXP2 ()
- in ((*#line 89.32 "parser.yacc"*)AST.BoolExp(AST.Greater, EXP1, EXP2)(*#line 467.1 "parser.yacc.sml"*)
+ in ((*#line 91.32 "parser.yacc"*)AST.BinExp(AST.Sub,  EXP1,  EXP2)(*#line 475.1 "parser.yacc.sml"*)
 )
 end)
  in ( LrTable.NT 0, ( result, EXP1left, EXP2right), rest671)
 end
 |  ( 18, ( ( _, ( MlyValue.EXP EXP2, _, EXP2right)) :: _ :: ( _, ( MlyValue.EXP EXP1, EXP1left, _)) :: rest671)) => let val  result = MlyValue.EXP (fn _ => let val  EXP1 = EXP1 ()
  val  EXP2 = EXP2 ()
- in ((*#line 90.32 "parser.yacc"*)AST.BoolExp(AST.Less, EXP1, EXP2)(*#line 474.1 "parser.yacc.sml"*)
+ in ((*#line 92.32 "parser.yacc"*)AST.BinExp(AST.Mul,  EXP1, EXP2)(*#line 482.1 "parser.yacc.sml"*)
 )
 end)
  in ( LrTable.NT 0, ( result, EXP1left, EXP2right), rest671)
 end
-|  ( 19, ( ( _, ( _, _, END1right)) :: ( _, ( MlyValue.EXP EXP1, _, _)) :: _ :: ( _, ( MlyValue.DECL DECL1, _, _)) :: ( _, ( _, LET1left, _)) :: rest671)) => let val  result = MlyValue.EXP (fn _ => let val  (DECL as DECL1) = DECL1 ()
+|  ( 19, ( ( _, ( MlyValue.EXP EXP2, _, EXP2right)) :: _ :: ( _, ( MlyValue.EXP EXP1, EXP1left, _)) :: rest671)) => let val  result = MlyValue.EXP (fn _ => let val  EXP1 = EXP1 ()
+ val  EXP2 = EXP2 ()
+ in ((*#line 93.32 "parser.yacc"*)AST.BinExp(AST.Div, EXP1, EXP2)(*#line 489.1 "parser.yacc.sml"*)
+)
+end)
+ in ( LrTable.NT 0, ( result, EXP1left, EXP2right), rest671)
+end
+|  ( 20, ( ( _, ( MlyValue.EXP EXP2, _, EXP2right)) :: _ :: ( _, ( MlyValue.EXP EXP1, EXP1left, _)) :: rest671)) => let val  result = MlyValue.EXP (fn _ => let val  EXP1 = EXP1 ()
+ val  EXP2 = EXP2 ()
+ in ((*#line 94.32 "parser.yacc"*)AST.BoolExp(AST.Greater, EXP1, EXP2)(*#line 496.1 "parser.yacc.sml"*)
+)
+end)
+ in ( LrTable.NT 0, ( result, EXP1left, EXP2right), rest671)
+end
+|  ( 21, ( ( _, ( MlyValue.EXP EXP2, _, EXP2right)) :: _ :: ( _, ( MlyValue.EXP EXP1, EXP1left, _)) :: rest671)) => let val  result = MlyValue.EXP (fn _ => let val  EXP1 = EXP1 ()
+ val  EXP2 = EXP2 ()
+ in ((*#line 95.32 "parser.yacc"*)AST.BoolExp(AST.Less, EXP1, EXP2)(*#line 503.1 "parser.yacc.sml"*)
+)
+end)
+ in ( LrTable.NT 0, ( result, EXP1left, EXP2right), rest671)
+end
+|  ( 22, ( ( _, ( _, _, END1right)) :: ( _, ( MlyValue.EXP EXP1, _, _)) :: _ :: ( _, ( MlyValue.DECL DECL1, _, _)) :: ( _, ( _, LET1left, _)) :: rest671)) => let val  result = MlyValue.EXP (fn _ => let val  (DECL as DECL1) = DECL1 ()
  val  (EXP as EXP1) = EXP1 ()
- in ((*#line 91.32 "parser.yacc"*)AST.LetExp(DECL, EXP)(*#line 481.1 "parser.yacc.sml"*)
+ in ((*#line 96.32 "parser.yacc"*)AST.LetExp(DECL, EXP)(*#line 510.1 "parser.yacc.sml"*)
 )
 end)
  in ( LrTable.NT 0, ( result, LET1left, END1right), rest671)
 end
-|  ( 20, ( ( _, ( _, _, FI1right)) :: ( _, ( MlyValue.EXP EXP3, _, _)) :: _ :: ( _, ( MlyValue.EXP EXP2, _, _)) :: _ :: ( _, ( MlyValue.EXP EXP1, _, _)) :: ( _, ( _, IF1left, _)) :: rest671)) => let val  result = MlyValue.EXP (fn _ => let val  EXP1 = EXP1 ()
+|  ( 23, ( ( _, ( _, _, FI1right)) :: ( _, ( MlyValue.EXP EXP3, _, _)) :: _ :: ( _, ( MlyValue.EXP EXP2, _, _)) :: _ :: ( _, ( MlyValue.EXP EXP1, _, _)) :: ( _, ( _, IF1left, _)) :: rest671)) => let val  result = MlyValue.EXP (fn _ => let val  EXP1 = EXP1 ()
  val  EXP2 = EXP2 ()
  val  EXP3 = EXP3 ()
- in ((*#line 92.32 "parser.yacc"*)AST.ConditionalExp(EXP1, EXP2, EXP3)(*#line 488.1 "parser.yacc.sml"*)
+ in ((*#line 97.32 "parser.yacc"*)AST.ConditionalExp(EXP1, EXP2, EXP3)(*#line 517.1 "parser.yacc.sml"*)
 )
 end)
  in ( LrTable.NT 0, ( result, IF1left, FI1right), rest671)
 end
-|  ( 21, ( ( _, ( _, _, RPAREN1right)) :: ( _, ( MlyValue.EXP EXP1, _, _)) :: ( _, ( _, LPAREN1left, _)) :: rest671)) => let val  result = MlyValue.EXP (fn _ => let val  (EXP as EXP1) = EXP1 ()
- in ((*#line 93.32 "parser.yacc"*)EXP(*#line 496.1 "parser.yacc.sml"*)
+|  ( 24, ( ( _, ( _, _, RPAREN1right)) :: ( _, ( MlyValue.EXP EXP1, _, _)) :: ( _, ( _, LPAREN1left, _)) :: rest671)) => let val  result = MlyValue.EXP (fn _ => let val  (EXP as EXP1) = EXP1 ()
+ in ((*#line 98.32 "parser.yacc"*)EXP(*#line 525.1 "parser.yacc.sml"*)
 )
 end)
  in ( LrTable.NT 0, ( result, LPAREN1left, RPAREN1right), rest671)
 end
-|  ( 22, ( ( _, ( MlyValue.EXP EXP1, _, EXP1right)) :: _ :: ( _, ( MlyValue.compositeType compositeType2, _, _)) :: _ :: _ :: ( _, ( MlyValue.compositeType compositeType1, _, _)) :: _ :: ( _, ( MlyValue.ID ID1, _, _)) :: _ :: ( _, ( _, FN1left, _)) :: rest671)) => let val  result = MlyValue.EXP (fn _ => let val  (ID as ID1) = ID1 ()
+|  ( 25, ( ( _, ( MlyValue.EXP EXP1, _, EXP1right)) :: _ :: ( _, ( MlyValue.compositeType compositeType2, _, _)) :: _ :: _ :: ( _, ( MlyValue.compositeType compositeType1, _, _)) :: _ :: ( _, ( MlyValue.ID ID1, _, _)) :: _ :: ( _, ( _, FN1left, _)) :: rest671)) => let val  result = MlyValue.EXP (fn _ => let val  (ID as ID1) = ID1 ()
  val  compositeType1 = compositeType1 ()
  val  compositeType2 = compositeType2 ()
  val  (EXP as EXP1) = EXP1 ()
- in ((*#line 94.81 "parser.yacc"*)AST.LambdaExp(AST.Lambda(ID, compositeType1, compositeType2, EXP))(*#line 502.1 "parser.yacc.sml"*)
+ in ((*#line 99.81 "parser.yacc"*)AST.LambdaExp(AST.Lambda(ID, compositeType1, compositeType2, EXP))(*#line 531.1 "parser.yacc.sml"*)
 )
 end)
  in ( LrTable.NT 0, ( result, FN1left, EXP1right), rest671)
 end
-|  ( 23, ( ( _, ( _, _, RPAREN1right)) :: ( _, ( MlyValue.EXP EXP2, _, _)) :: ( _, ( MlyValue.EXP EXP1, _, _)) :: ( _, ( _, LPAREN1left, _)) :: rest671)) => let val  result = MlyValue.EXP (fn _ => let val  EXP1 = EXP1 ()
+|  ( 26, ( ( _, ( _, _, RPAREN1right)) :: ( _, ( MlyValue.EXP EXP2, _, _)) :: ( _, ( MlyValue.EXP EXP1, _, _)) :: ( _, ( _, LPAREN1left, _)) :: rest671)) => let val  result = MlyValue.EXP (fn _ => let val  EXP1 = EXP1 ()
  val  EXP2 = EXP2 ()
- in ((*#line 95.33 "parser.yacc"*)AST.AppExp(EXP1, EXP2)(*#line 511.1 "parser.yacc.sml"*)
+ in ((*#line 100.33 "parser.yacc"*)AST.AppExp(EXP1, EXP2)(*#line 540.1 "parser.yacc.sml"*)
 )
 end)
  in ( LrTable.NT 0, ( result, LPAREN1left, RPAREN1right), rest671)
 end
-|  ( 24, ( ( _, ( MlyValue.compositeType compositeType2, _, compositeType2right)) :: _ :: ( _, ( MlyValue.compositeType compositeType1, compositeType1left, _)) :: rest671)) => let val  result = MlyValue.compositeType (fn _ => let val  compositeType1 = compositeType1 ()
+|  ( 27, ( ( _, ( MlyValue.DECL DECL1, DECL1left, DECL1right)) :: rest671)) => let val  result = MlyValue.EXP (fn _ => let val  (DECL as DECL1) = DECL1 ()
+ in ((*#line 101.33 "parser.yacc"*)AST.DeclExp(DECL)(*#line 547.1 "parser.yacc.sml"*)
+)
+end)
+ in ( LrTable.NT 0, ( result, DECL1left, DECL1right), rest671)
+end
+|  ( 28, ( ( _, ( MlyValue.compositeType compositeType2, _, compositeType2right)) :: _ :: ( _, ( MlyValue.compositeType compositeType1, compositeType1left, _)) :: rest671)) => let val  result = MlyValue.compositeType (fn _ => let val  compositeType1 = compositeType1 ()
  val  compositeType2 = compositeType2 ()
- in ((*#line 98.38 "parser.yacc"*)AST.ARROW(compositeType1, compositeType2)(*#line 518.1 "parser.yacc.sml"*)
+ in ((*#line 104.38 "parser.yacc"*)AST.ARROW(compositeType1, compositeType2)(*#line 553.1 "parser.yacc.sml"*)
 )
 end)
- in ( LrTable.NT 4, ( result, compositeType1left, compositeType2right), rest671)
+ in ( LrTable.NT 6, ( result, compositeType1left, compositeType2right), rest671)
 end
-|  ( 25, ( ( _, ( MlyValue.primitiveType primitiveType1, primitiveType1left, primitiveType1right)) :: rest671)) => let val  result = MlyValue.compositeType (fn _ => let val  (primitiveType as primitiveType1) = primitiveType1 ()
- in ((*#line 99.38 "parser.yacc"*)AST.TYPE(primitiveType)(*#line 525.1 "parser.yacc.sml"*)
+|  ( 29, ( ( _, ( MlyValue.primitiveType primitiveType1, primitiveType1left, primitiveType1right)) :: rest671)) => let val  result = MlyValue.compositeType (fn _ => let val  (primitiveType as primitiveType1) = primitiveType1 ()
+ in ((*#line 105.38 "parser.yacc"*)AST.TYPE(primitiveType)(*#line 560.1 "parser.yacc.sml"*)
 )
 end)
- in ( LrTable.NT 4, ( result, primitiveType1left, primitiveType1right), rest671)
+ in ( LrTable.NT 6, ( result, primitiveType1left, primitiveType1right), rest671)
 end
-|  ( 26, ( ( _, ( _, INT1left, INT1right)) :: rest671)) => let val  result = MlyValue.primitiveType (fn _ => ((*#line 100.26 "parser.yacc"*)AST.INT(*#line 531.1 "parser.yacc.sml"*)
+|  ( 30, ( ( _, ( _, INT1left, INT1right)) :: rest671)) => let val  result = MlyValue.primitiveType (fn _ => ((*#line 106.26 "parser.yacc"*)AST.INT(*#line 566.1 "parser.yacc.sml"*)
 ))
- in ( LrTable.NT 3, ( result, INT1left, INT1right), rest671)
+ in ( LrTable.NT 5, ( result, INT1left, INT1right), rest671)
 end
-|  ( 27, ( ( _, ( _, BOOL1left, BOOL1right)) :: rest671)) => let val  result = MlyValue.primitiveType (fn _ => ((*#line 101.26 "parser.yacc"*)AST.BOOL(*#line 535.1 "parser.yacc.sml"*)
+|  ( 31, ( ( _, ( _, BOOL1left, BOOL1right)) :: rest671)) => let val  result = MlyValue.primitiveType (fn _ => ((*#line 107.26 "parser.yacc"*)AST.BOOL(*#line 570.1 "parser.yacc.sml"*)
 ))
- in ( LrTable.NT 3, ( result, BOOL1left, BOOL1right), rest671)
+ in ( LrTable.NT 5, ( result, BOOL1left, BOOL1right), rest671)
 end
-|  ( 28, ( ( _, ( _, REAL1left, REAL1right)) :: rest671)) => let val  result = MlyValue.primitiveType (fn _ => ((*#line 102.26 "parser.yacc"*)AST.REAL(*#line 539.1 "parser.yacc.sml"*)
+|  ( 32, ( ( _, ( _, REAL1left, REAL1right)) :: rest671)) => let val  result = MlyValue.primitiveType (fn _ => ((*#line 108.26 "parser.yacc"*)AST.REAL(*#line 574.1 "parser.yacc.sml"*)
 ))
- in ( LrTable.NT 3, ( result, REAL1left, REAL1right), rest671)
+ in ( LrTable.NT 5, ( result, REAL1left, REAL1right), rest671)
 end
-|  ( 29, ( ( _, ( _, STRING1left, STRING1right)) :: rest671)) => let val  result = MlyValue.primitiveType (fn _ => ((*#line 103.26 "parser.yacc"*)AST.STRING(*#line 543.1 "parser.yacc.sml"*)
+|  ( 33, ( ( _, ( _, STRING1left, STRING1right)) :: rest671)) => let val  result = MlyValue.primitiveType (fn _ => ((*#line 109.26 "parser.yacc"*)AST.STRING(*#line 578.1 "parser.yacc.sml"*)
 ))
- in ( LrTable.NT 3, ( result, STRING1left, STRING1right), rest671)
+ in ( LrTable.NT 5, ( result, STRING1left, STRING1right), rest671)
 end
 | _ => raise (mlyAction i392)
 end

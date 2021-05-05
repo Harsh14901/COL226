@@ -20,6 +20,7 @@ and exp = NumExp of int
 			| ConditionalExp of exp * exp * exp
 			| AppExp of exp * exp
 			| LambdaExp of function
+			| DeclExp of decl
 and  
 function = Lambda of id * compositeType * compositeType * exp
 and
