@@ -1,1 +1,10 @@
-(((fn(x: int): int->int => fn(x:int):int => 2*x) 7) 5);
+let
+  fun abc(x: int->int): int =>
+    let
+      fun abc(x: int): int => x + 1
+    in
+      if 1 = 1 then (abc (x 1)) else (abc (x 2)) fi
+    end
+in
+  (abc fn(x:int):int => if x = 1 then 5 else 10 fi)
+end;

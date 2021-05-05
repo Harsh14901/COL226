@@ -38,10 +38,20 @@ compositeType = ARROW of compositeType * compositeType
 
 type environment = (id * value) list
 
+type typeEnvironment = (id * compositeType) list
+
 fun envAdd (var:id, v:value, env:environment) =
     (var,v)::env
 
+fun typeEnvAdd (var:id, t:compositeType, env:typeEnvironment) =
+    (var,t)::env
+
 fun envLookup (var:id, env:environment) =
+    case List.find(fn (x, _) => x = var) env of
+				       SOME (x, v)   => v
+				    |   NONE => raise Fail "Environment lookup error"							    
+
+fun typeLookup (var:id, env:typeEnvironment) =
     case List.find(fn (x, _) => x = var) env of
 				       SOME (x, v)   => v
 				    |   NONE => raise Fail "Environment lookup error"							    
@@ -50,8 +60,9 @@ fun envLookupNoError (var:id, env:environment) =
     case List.find(fn (x, _) => x = var) env of
 				       SOME (x, v)   => v
 				    |   NONE => NULL
+
 end
+			
+
+
 							    
-
-
-

@@ -17,8 +17,10 @@ fun evalExp(e:exp, env:environment):value =
         in
             evalExp(e2, envAdd (x, v1, env))
         end	
-    | LetExp(FunDecl(fnName, Lambda(arg, argType, retType, body)), e) => evalExp(e, envAdd(fnName, LambdaVal(Lambda(arg,argType, retType, body)), env))
-    
+    | LetExp(FunDecl(fnName, Lambda(arg, argType, retType, body)), e) => 
+        evalExp(e, envAdd(fnName, LambdaVal(Lambda(arg,argType, retType, body)), env))
+
+
     | NegateExp(e) => 
         (case evalExp(e, env) of 
             IntVal(i) => IntVal(~i)
@@ -27,17 +29,9 @@ fun evalExp(e:exp, env:environment):value =
         
     | ConditionalExp(e1, e2, e3) => 
         let 
-            val v1 = evalExp(e1, env)
-            val v2 = evalExp(e2, env)
-            val v3 = evalExp(e3, env)
-            val valid = (case (v2, v3) of  
-                (IntVal(i1), IntVal(i2)) => true
-            |   (StringVal(s1), StringVal(s2)) => true
-            |   (BoolVal(b1), BoolVal(b2)) => true
-            | _ => raise brokenTypes)
-            val BoolVal(b) = v1
+            val BoolVal(b) = evalExp(e1, env)
         in 
-            if b then v2 else v3
+            if b then evalExp(e2, env) else evalExp(e3, env)
         end
     | AppExp(e1, e2) =>
         let
@@ -113,4 +107,77 @@ substituteExp(e: exp, env: environment): exp =
     | NumExp(v) => NumExp(v)
     | ConstExp(v) => ConstExp(v)
     | StringExp(v) => StringExp(v)
+and 
+checkTypes(e: exp, typeEnv: typeEnvironment): compositeType =
+    case e of 
+        NumExp(n) => TYPE(INT)
+    |   StringExp(s) => TYPE(STRING)
+    |   ConstExp(c) => TYPE(BOOL)
+    |   VarExp(v) => typeLookup(v, typeEnv)
+    |   BinExp(b, e1, e2) => 
+            let
+              val t1 = checkTypes(e1, typeEnv)
+              val t2 = checkTypes(e2, typeEnv)
+            in
+              if t1 = t2 andalso t1 = TYPE(INT) then t1 else raise brokenTypes
+            end
+    |   BoolExp(b, e1, e2) => 
+            let
+              val t1 = checkTypes(e1, typeEnv)
+              val t2 = checkTypes(e2, typeEnv)
+            in
+              if t1 = t2 andalso (t1 = TYPE(INT) orelse t1 = TYPE(STRING) orelse t1 = TYPE(BOOL)) then 
+                TYPE(BOOL) 
+              else
+                raise brokenTypes
+            end
+    |   LetExp(ValDecl(x, e1), e2)  =>
+            let
+                val t1 = checkTypes (e1, typeEnv)
+            in
+                checkTypes(e2, typeEnvAdd (x, t1, typeEnv))
+            end
+
+    |   LetExp(FunDecl(fnName, Lambda(arg, argType, retType, body)), e) => 
+            let
+                val f = LambdaExp(Lambda(arg,argType, retType, body))
+                val fnType = ARROW(argType, retType)
+                val newTypeEnv = typeEnvAdd(fnName, fnType , typeEnv)
+                val _ = checkTypes(f, newTypeEnv)
+            in  
+                checkTypes(e, newTypeEnv)
+            end
+
+    |   NegateExp(e) => checkTypes(e, typeEnv)
+    |   ConditionalExp(e1, e2, e3) => 
+            let
+              val t1 = checkTypes(e1, typeEnv)
+              val t2 = checkTypes(e2, typeEnv)
+              val t3 = checkTypes(e3, typeEnv)
+            in
+              if t1 = TYPE(BOOL) andalso t2 = t3 then t2 else raise brokenTypes
+            end
+    |   AppExp(e1, e2) => 
+            let
+              val ARROW(t1, t2) = checkTypes(e1, typeEnv)
+              val t3 = checkTypes(e2, typeEnv)
+            in
+              if t1 = t3 then t2 else raise brokenTypes
+            end
+    |   LambdaExp(Lambda(arg,argType, retType, body)) => 
+            let
+              val newTypeEnv = typeEnvAdd(arg, argType, typeEnv)
+              val t1 = checkTypes(body, newTypeEnv)
+            in
+              if retType = t1 then ARROW(argType,retType) else raise brokenTypes
+            end
+    
+and 
+evalWithTypeCheck(e:exp): (value * compositeType) = 
+    let
+        val t = checkTypes(e, [])
+        val v = evalExp(e, [])
+    in
+        (v , t)
+    end
 end
