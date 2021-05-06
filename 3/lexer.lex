@@ -35,7 +35,14 @@ structure Tokens= Tokens
    ("int", Tokens.INT),
    ("bool", Tokens.BOOL),
    ("real", Tokens.REAL),
-   ("string", Tokens.STRING)
+   ("string", Tokens.STRING),
+   ("PLUS", Tokens.PLUS),
+   ("MINUS", Tokens.MINUS),
+   ("TIMES", Tokens.TIMES),
+   ("NEGATE", Tokens.NEGATE),
+   ("EQUALS", Tokens.EQUALS),
+   ("LESSTHAN", Tokens.LESSTHAN),
+   ("GREATERTHAN", Tokens.GREATERTHAN)
    
    ]
 
@@ -60,16 +67,10 @@ digit=[0-9];
 ":"         => (Tokens.COLON(!linep, yypos-1));
 "=>"         => (Tokens.DECLARROW(!linep, yypos-1));
 "->"         => (Tokens.ARROW(!linep, yypos-1));
-"~"         => (Tokens.NEGATE(!linep, yypos-1));
-"+"         => (Tokens.PLUS(!linep, yypos-1));
-"-"         => (Tokens.MINUS(!linep, yypos-1));
-"*"         => (Tokens.TIMES(!linep, yypos-1));
-"<"         => (Tokens.LESSTHAN(!linep, yypos-1));
-">"         => (Tokens.GREATERTHAN(!linep, yypos-1));
-"="         => (Tokens.EQUALS(!linep, yypos-1));
+"="         => (Tokens.ASSIGN(!linep, yypos-1));
 "("         => (Tokens.LPAREN(!linep, yypos-1));
 ")"         => (Tokens.RPAREN(!linep, yypos-1));
 "TRUE"      => (Tokens.CONST(true ,!linep, yypos-1));
 "FALSE"     => (Tokens.CONST(false ,!linep, yypos-1));
-{alpha}+    => (findKeywords(yytext,!linep,yypos-1));
+{alpha}+{digit}*    => (findKeywords(yytext,!linep,yypos-1));
 .           => (error (yytext ,!linep ,yypos-1); lex());

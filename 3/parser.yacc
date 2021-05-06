@@ -12,6 +12,7 @@
 | OR 
 | XOR 
 | EQUALS 
+| ASSIGN 
 | IMPLIES 
 | IF 
 | THEN 
@@ -59,6 +60,7 @@
 %right IF THEN ELSE FI
 %right ARROW DECLARROW
 %right LET IN END
+%nonassoc ASSIGN
 %right IMPLIES
 %left AND OR XOR EQUALS
 %right NOT
@@ -73,7 +75,7 @@ StatementSet:                             ([])
 | Statement StatementSet                  (Statement::StatementSet)
 Statement : EXP TERM                      (EXP)
 
-DECL: VAL ID EQUALS EXP       (AST.ValDecl(ID, EXP))
+DECL: ID ASSIGN EXP       (AST.ValDecl(ID, EXP))
   | FUN ID LPAREN ID COLON compositeType RPAREN COLON compositeType DECLARROW EXP (AST.FunDecl(ID1, AST.Lambda(ID2, compositeType1, compositeType2, EXP)))
 
 

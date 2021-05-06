@@ -32,6 +32,7 @@ val ELSE:  'a * 'a -> (svalue,'a) token
 val THEN:  'a * 'a -> (svalue,'a) token
 val IF:  'a * 'a -> (svalue,'a) token
 val IMPLIES:  'a * 'a -> (svalue,'a) token
+val ASSIGN:  'a * 'a -> (svalue,'a) token
 val EQUALS:  'a * 'a -> (svalue,'a) token
 val XOR:  'a * 'a -> (svalue,'a) token
 val OR:  'a * 'a -> (svalue,'a) token
