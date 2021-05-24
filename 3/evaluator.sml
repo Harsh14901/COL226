@@ -74,6 +74,7 @@ case (b, evalExp(e1, env), evalExp(e2, env)) of
     |   (Implies, BoolVal(b1), BoolVal(b2)) => BoolVal((not b1) orelse b2)
     |   (Eq, IntVal i1, IntVal i2)  => BoolVal (i1 = i2)
     |   (Eq, StringVal s1, StringVal s2) => BoolVal (s1 = s2)
+    |   (Eq, BoolVal b1, BoolVal b2) => BoolVal (b1 = b2)
     |   (Greater, IntVal i1, IntVal i2)  => BoolVal (i1 > i2)
     |   (Greater, StringVal s1, StringVal s2) => BoolVal (s1 > s2)
     |   (Less, IntVal i1, IntVal i2)  => BoolVal (i1 < i2)

@@ -104,7 +104,8 @@ EXP : CONST                   (AST.ConstExp(CONST))
   
 compositeType : 
 compositeType ARROW compositeType   (AST.ARROW(compositeType1, compositeType2))
-              | primitiveType       (AST.TYPE(primitiveType))
+| primitiveType                 (AST.TYPE(primitiveType))
+| LPAREN compositeType RPAREN   (compositeType)
 primitiveType : INT     (AST.INT)
               | BOOL    (AST.BOOL)
               | REAL    (AST.REAL)
